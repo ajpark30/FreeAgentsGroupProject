@@ -16,7 +16,7 @@ Data acquisition, wget, JSoup -
 Database admin -  
 
 ### REST Endpoints
-waterfalls/find/byLocation GET  
+waterfalls/find/byLocation GET - Andrew created a class "waterfallByLocation", you can refactor name if needed. 
 waterfalls/addData/new POST  
 waterfalls/addData/id PUT  
 waterfalls/remove/id DELETE
@@ -24,8 +24,11 @@ waterfalls/remove/id DELETE
 
 ### Example Application
 
-Home page 
+Home page - index.jsp created with waterfallResults.jsp
 - Ask user for location
 
 Results List
 - Display nearest falls in order by distance
+
+###Create a hardcoded database so we can get week 9 REST credit
+We want to be able to have some data our REST can display to get credit for week 9 Exercise
