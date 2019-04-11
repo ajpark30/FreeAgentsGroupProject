@@ -30,5 +30,5 @@ Home page - index.jsp created with waterfallResults.jsp
 Results List
 - Display nearest falls in order by distance
 
-###Create a hardcoded database so we can get week 9 REST credit
+### Create a hardcoded database so we can get week 9 REST credit
 We want to be able to have some data our REST can display to get credit for week 9 Exercise
