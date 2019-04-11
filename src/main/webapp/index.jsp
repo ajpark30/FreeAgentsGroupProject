@@ -25,13 +25,13 @@
         </div>
     </div>
     <div class="container col-md-8 col-md-offset-2">
-        <h1>Search for all Users in Database</h1>
+        <h1>Search All Waterfalls</h1>
         <div class="row">
             <div class="well" id="userWell">
                 <form class="form-horizontal" action="searchWaterFall">
                     <div class="form-group">
                         <div class="col-sm-offset-6 col-sm-6">
-                            <button type="submit" name="submit" value="viewAll" class="btn btn-primary">View All WaterFalls</button>
+                            <button type="submit" name="submit" value="viewAll" class="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </form>
