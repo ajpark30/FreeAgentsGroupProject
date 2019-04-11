@@ -7,8 +7,10 @@ This API accepts location parameters via a REST endpoint and supplies a JSON res
 [Waterfall info](start_doc.md)
 
 ### Job assignments 
-*These roles need to be filled*
 Git Master - Andrew  
+
+*These roles need to be filled*
+
 End points -
 Usage Documentation -  
 Example Client App -  
