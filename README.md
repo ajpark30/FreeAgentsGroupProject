@@ -7,9 +7,9 @@ This API accepts location parameters via a REST endpoint and supplies a JSON res
 [Waterfall info](start_doc.md)
 
 ### Job assignments 
-
+*These roles need to be filled*
 Git Master - Andrew  
-End points - Curtis  
+End points -
 Usage Documentation -  
 Example Client App -  
 Data acquisition, wget, JSoup -  
@@ -30,5 +30,7 @@ Home page - index.jsp created with waterfallResults.jsp
 Results List
 - Display nearest falls in order by distance
 
-### Create a hardcoded database so we can get week 9 REST credit
+### Create a hardcoded database
 We want to be able to have some data our REST can display to get credit for week 9 Exercise
+
+*Two or three falls would be enough to show the closest*
