@@ -29,29 +29,40 @@ public class WaterfallEndpoints extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/waterfallGetJson.jsp");
-//        dispatcher.forward(req, resp);
-
+        // check credentials
+        // access request JSON
+        // extract search fields
+        // verify complete, or send error message
+        // do database query
+        // create JSON response
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/waterfallPostJson.jsp");
-//        dispatcher.forward(req, resp);
-
+        // check credentials
+        // access request JSON
+        // extract new waterfall fields
+        // verify complete, or send error message
+        // do database insert/update
+        // create JSON success response
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/waterfallPutJson.jsp");
-//        dispatcher.forward(req, resp);
-
+        // check credentials
+        // access request JSON
+        // extract new waterfall fields
+        // verify id exists, or send error message
+        // do database insert/update
+        // create JSON success response
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/waterfallDeleteJson.jsp");
-//        dispatcher.forward(req, resp);
-
+        // check credentials
+        // access request JSON
+        // verify id exists, or send error message
+        // do database delete
+        // create JSON success response
     }
 }
