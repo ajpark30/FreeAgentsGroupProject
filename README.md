@@ -13,9 +13,9 @@ Unit Testing - Blake
 
 End points -  
 Usage Documentation -  
-Example Client App -  
+Example Client App - Andrew 
 Data acquisition, wget, JSoup -  
-Database admin -  
+Database admin -  Andrew
 
 ### REST Endpoints
 
@@ -33,7 +33,11 @@ Home page - index.jsp created with waterfallResults.jsp
 Results List
 - Display nearest falls in order by distance
 
+### Create simple user page to show waterfall search
+Andrew
+
 ### Create a hardcoded database
+Andrew
 We want to be able to have some data our REST can display to get credit for week 9 Exercise
 
 *Two or three falls would be enough to show the closest*
