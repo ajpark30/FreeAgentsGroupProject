@@ -23,7 +23,7 @@ import java.io.IOException;
         urlPatterns = {"/waterfalls"}
 )
 
-public class SearchWaterfall extends HttpServlet {
+public class WaterfallEndpoints extends HttpServlet {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
