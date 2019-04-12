@@ -13,12 +13,13 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 /**
- * Add docs here
- * @author Andrew Park
+ * This servlet routes the HTTP requests of a RESTful client app.
+ *
+ * @author cwmoore
  */
 
 @WebServlet(
-        name = "SearchWaterfallPage",
+        name = "waterfallEndpoints",
         urlPatterns = {"/waterfalls"}
 )
 
