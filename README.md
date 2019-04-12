@@ -14,9 +14,9 @@ Unit Testing - Blake
 
 End points -  
 Usage Documentation -  
-Example Client App -  
+Example Client App - Andrew 
 Data acquisition, wget, JSoup -  
-Database admin -  
+Database admin -  Andrew
 
 ### REST Endpoints
 
@@ -34,7 +34,24 @@ Home page - index.jsp created with waterfallResults.jsp
 Results List
 - Display nearest falls in order by distance
 
+### Example Client App
+Andrew
+TO-DO
+add hibernate property files
+add jsoup dependency
+connect search with results by pulling data from DB
+
+DONE
+Simple search page with a zipcode search and a search all
+Result page
+
 ### Create a hardcoded database
-We want to be able to have some data our REST can display to get credit for week 9 Exercise
+Andrew
+TO-DO
+Create DB properties files
+
+DONE
+Created sql queries to create DB hard coded data "createDatabase.sql" with three waterfalls
+ONE BIG QUESTION I HAVE IS THE WAY WE WANT TO STORE THE COORDINATES?????? I created three different options and figured we all could talk about it.
 
 *Two or three falls would be enough to show the closest*
