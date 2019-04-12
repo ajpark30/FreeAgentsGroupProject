@@ -11,17 +11,18 @@ Git Master - Andrew
 
 *These roles need to be filled*
 
-End points -
+End points -  
 Usage Documentation -  
 Example Client App -  
 Data acquisition, wget, JSoup -  
 Database admin -  
 
 ### REST Endpoints
-waterfalls/find/byLocation GET - Andrew created a class "waterfallByLocation", you can refactor name if needed. 
-waterfalls/addData/new POST  
-waterfalls/addData/id PUT  
-waterfalls/remove/id DELETE
+
+waterfalls/ GET - Andrew created a class "waterfallByLocation", you can refactor name if needed. 
+waterfalls/ POST  
+waterfalls/ PUT  
+waterfalls/ DELETE
 
 
 ### Example Application
