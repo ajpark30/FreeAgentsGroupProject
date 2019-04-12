@@ -19,7 +19,7 @@ Database admin -
 
 ### REST Endpoints
 
-waterfalls/ GET - Andrew created a class "waterfallByLocation", you can refactor name if needed. 
+waterfalls/ GET - Andrew created a class "waterfallByLocation", you can refactor name if needed.   
 waterfalls/ POST  
 waterfalls/ PUT  
 waterfalls/ DELETE
