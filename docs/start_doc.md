@@ -7,14 +7,14 @@
 4. API returns it to client
 
 ## What is in a Waterfall Object
-Name of waterfall
-Country
-State/region
-Nearest city
-Coordinates (lat/lon)
-Park/Reserve
-River
-Photo URLs
+1. Name of waterfall
+1. Country
+1. State/region
+1. Nearest city
+1. Coordinates (lat/lon)
+1. Park/Reserve
+1. River
+1. Photo URLs
 
 ## Sources
 * https://en.wikipedia.org/wiki/List_of_waterfalls
