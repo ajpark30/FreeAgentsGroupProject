@@ -9,14 +9,14 @@ This API accepts location parameters via a REST endpoint and supplies a JSON res
 ### Job assignments 
 Git Master - Andrew  
 Unit Testing - Blake
+Database Admin - Curtis
+Usage Documentation - Curtis
 
 *These roles need to be filled*
 
 End points -  
-Usage Documentation -  
 Example Client App -  
-Data acquisition, wget, JSoup -  
-Database admin -  
+Data acquisition, wget, JSoup -
 
 ### REST Endpoints
 
