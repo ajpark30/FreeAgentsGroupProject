@@ -1,4 +1,6 @@
 ### Waterfalls API Documentation
+[Waterfall Objects](start_doc.md) 
+
 1. */waterfalls/* GET
     + find by id
     + find by location
