@@ -8,9 +8,9 @@ This API accepts location parameters via a REST endpoint and supplies a JSON res
 
 ### Job assignments 
 Git Master - Andrew  
-Unit Testing - Blake
-Database Admin - Curtis
-Usage Documentation - Curtis
+Unit Testing - Blake  
+Database Admin - Curtis  
+Usage Documentation - Curtis  
 
 *These roles need to be filled*
 
