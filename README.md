@@ -4,7 +4,8 @@
 ## Concept:
 As long as water flows downhill, waterfalls will run over cliff faces large and small, compelling wonder and awe.
 This API accepts location parameters via a REST endpoint and supplies a JSON response with information about nearby falls.  
-[Waterfall info](start_doc.md)
+[Waterfalls Start](docs/start_doc.md)
+[Waterfalls Usage](docs/docs.md)
 
 ### Job assignments 
 Git Master - Andrew  
