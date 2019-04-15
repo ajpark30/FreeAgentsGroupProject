@@ -1,2 +1,5 @@
-work/
-.idea/
+.idea/*
+target/*
+work/*
+
+
