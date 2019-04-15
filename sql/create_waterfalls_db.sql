@@ -1,4 +1,4 @@
-DROP DATABASE waterfalls;
+DROP DATABASE IF EXISTS waterfalls;
 CREATE DATABASE waterfalls;
 USE waterfalls;
 --
