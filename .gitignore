@@ -1,2 +1,4 @@
-work/
-.idea/
+giwork/
+.idea/*
+target/*
+work/*
