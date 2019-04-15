@@ -27,13 +27,13 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(name="id")
-    private int id;
+    @Column(name="photo_id")
+    private int photo_id;
 
     @XmlTransient
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "id",
+    @JoinColumn(name = "waterfall_id",
             foreignKey = @ForeignKey(name = "waterfall_photo_cx")
     )
     private Waterfall waterfall;
@@ -59,14 +59,14 @@ public class Photo {
     /**
      * Instantiates a new Photo.
      *
-     * @param id           the id
+     * @param photo_id           the photo_id
      * @param waterfall the waterfall
      * @param sourceURL    the source url
      * @param title        the title
      * @param localPath    the local path
      */
-    public Photo(int id, Waterfall waterfall, String sourceURL, String title, String localPath) {
-        this.id = id;
+    public Photo(int photo_id, Waterfall waterfall, String sourceURL, String title, String localPath) {
+        this.photo_id = photo_id;
         this.waterfall = waterfall;
         this.sourceURL = sourceURL;
         this.title = title;
@@ -74,21 +74,21 @@ public class Photo {
     }
 
     /**
-     * Gets id.
+     * Gets photo_id.
      *
-     * @return the id
+     * @return the photo_id
      */
-    public int getId() {
-        return id;
+    public int getPhotoId() {
+        return photo_id;
     }
 
     /**
-     * Sets id.
+     * Sets photo_id.
      *
-     * @param id the id
+     * @param photo_id the photo_id
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setPhotoId(int photo_id) {
+        this.photo_id = photo_id;
     }
 
     /**
@@ -318,7 +318,7 @@ public class Photo {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Photo photo = (Photo) object;
-        return id == photo.id &&
+        return photo_id == photo.photo_id &&
                 waterfall == photo.waterfall &&
                 height == photo.height &&
                 width == photo.width &&
@@ -339,7 +339,7 @@ public class Photo {
      * @return the int
      */
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, waterfall, dateAcquired, sourceURL, linkedFromURL, attribution, dateTaken, title, caption, description, localPath, height, width);
+        return Objects.hash(super.hashCode(), photo_id, waterfall, dateAcquired, sourceURL, linkedFromURL, attribution, dateTaken, title, caption, description, localPath, height, width);
     }
 
     /**
@@ -350,7 +350,7 @@ public class Photo {
     @Override
     public String toString() {
         return "Photo{" +
-                "id=" + id +
+                "photo_id=" + photo_id +
                 ", waterfall=" + waterfall +
                 ", dateAcquired=" + dateAcquired +
                 ", sourceURL='" + sourceURL + '\'' +

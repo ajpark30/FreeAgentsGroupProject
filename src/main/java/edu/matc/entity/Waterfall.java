@@ -6,12 +6,11 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The type Waterfall.
+ *
  * @author cwmoore
  * @author pwaite
  */
@@ -24,7 +23,7 @@ public class Waterfall {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private int id;
+    private int waterfall_id;
 
     private String name;
     private String description;
@@ -39,7 +38,7 @@ public class Waterfall {
 
     @OneToMany(mappedBy = "waterfall",
             cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Photo> photos = new HashSet<>();
+    private List<Photo> photos = new ArrayList<>();
 
 	//private Set<Photo> photos;
 
@@ -65,19 +64,19 @@ public class Waterfall {
     /**
      * Instantiates a new Waterfall.
      *
-     * @param id        the id
-     * @param name      the name
-     * @param country   the country
-     * @param state     the state
-     * @param region    the region
-     * @param city      the city
-     * @param latitude  the latitude
-     * @param longitude the longitude
-     * @param preserve  the preserve
-     * @param river     the river
+     * @param waterfall_id the waterfall_id
+     * @param name         the name
+     * @param country      the country
+     * @param state        the state
+     * @param region       the region
+     * @param city         the city
+     * @param latitude     the latitude
+     * @param longitude    the longitude
+     * @param preserve     the preserve
+     * @param river        the river
      */
-    public Waterfall(int id, String name, String country, String state, String region, String city, float latitude, float longitude, String preserve, String river) {
-        this.id = id;
+    public Waterfall(int waterfall_id, String name, String country, String state, String region, String city, float latitude, float longitude, String preserve, String river) {
+        this.waterfall_id = waterfall_id;
         this.name = name;
         this.country = country;
         this.state = state;
@@ -90,21 +89,21 @@ public class Waterfall {
     }
 
     /**
-     * Gets id.
+     * Gets waterfall_id.
      *
-     * @return the id
+     * @return the waterfall_id
      */
-    public int getId() {
-        return id;
+    public int getWaterfallId() {
+        return waterfall_id;
     }
 
     /**
-     * Sets id.
+     * Sets waterfall_id.
      *
-     * @param id the id
+     * @param waterfall_id the waterfall_id
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setWaterfallId(int waterfall_id) {
+        this.waterfall_id = waterfall_id;
     }
 
     /**
@@ -288,6 +287,24 @@ public class Waterfall {
     }
 
     /**
+     * Gets photos.
+     *
+     * @return the photos
+     */
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    /**
+     * Sets photos.
+     *
+     * @param photos the photos
+     */
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    /**
      * Equals boolean.
      *
      * @param object the object
@@ -298,7 +315,7 @@ public class Waterfall {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Waterfall waterfall = (Waterfall) object;
-        return id == waterfall.id &&
+        return waterfall_id == waterfall.waterfall_id &&
                 Float.compare(waterfall.latitude, latitude) == 0 &&
                 Float.compare(waterfall.longitude, longitude) == 0 &&
                 name.equals(waterfall.name) &&
@@ -316,7 +333,7 @@ public class Waterfall {
      * @return the int
      */
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name, country, state, region, city, latitude, longitude, preserve, river);
+        return Objects.hash(super.hashCode(), waterfall_id, name, country, state, region, city, latitude, longitude, preserve, river);
     }
 
     /**
@@ -327,7 +344,7 @@ public class Waterfall {
     @Override
     public String toString() {
         return "Waterfall{" +
-                "id=" + id +
+                "waterfall_id=" + waterfall_id +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
                 ", state='" + state + '\'' +

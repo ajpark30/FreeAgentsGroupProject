@@ -1,12 +1,11 @@
-
-DROP TABLE IF EXISTS `user`;
-DROP TABLE IF EXISTS `role`;
-DROP TABLE IF EXISTS `waterfalls`;
+DROP DATABASE waterfalls;
+CREATE DATABASE waterfalls;
+USE waterfalls;
 --
 -- Table structure for table `waterfall`
 --
 
-DROP TABLE IF EXISTS `waterfall`;
+DROP TABLE IF EXISTS waterfall;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `waterfall` (
@@ -24,7 +23,6 @@ CREATE TABLE `waterfall` (
   `river` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`waterfall_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `waterfall`
@@ -32,23 +30,15 @@ CREATE TABLE `waterfall` (
 
 LOCK TABLES `waterfall` WRITE;
 /*!40000 ALTER TABLE `waterfall` DISABLE KEYS */;
+INSERT INTO waterfall (waterfall_id, name, latitude, longitude) VALUES (1, 'Kalandula Falls', -9.075833, 16.003333);
+INSERT INTO waterfall (waterfall_id, name, latitude, longitude) VALUES (2, 'Sedudo Waterfall', -7.780216, 111.758159);
+INSERT INTO waterfall (waterfall_id, name, latitude, longitude) VALUES (3, 'Grandfather Falls', 45.313056, -89.784722);
 /*!40000 ALTER TABLE `waterfall` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2019-04-12 13:43:13
 
 DROP TABLE IF EXISTS photo;
 CREATE TABLE photo (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	photo_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	waterfall_id INT,
   dateAcquired DATETIME,
 	sourceURL VARCHAR(300),
@@ -59,7 +49,14 @@ CREATE TABLE photo (
 	caption VARCHAR(100),
 	description VARCHAR(100),
 	localPath VARCHAR(300),
-	height INT,
-	width INT,
-  CONSTRAINT waterfall_photo_cx FOREIGN KEY (waterfall_id) REFERENCES user (id)
+	height INT DEFAULT 0,
+	width INT DEFAULT 0,
+  CONSTRAINT waterfall_photo_cx FOREIGN KEY (waterfall_id) REFERENCES waterfall (waterfall_id)
 );
+
+
+LOCK TABLES `photo` WRITE;
+/*!40000 ALTER TABLE `photo` DISABLE KEYS */;
+INSERT INTO photo (photo_id, waterfall_id, sourceURL) VALUES (1, 3, 'https://upload.wikimedia.org/wikipedia/commons/3/3a/GrandfatherExposedPreCambrian.jpg');
+/*!40000 ALTER TABLE `photo` ENABLE KEYS */;
+UNLOCK TABLES;
