@@ -12,12 +12,12 @@ Git Master - Andrew
 Unit Testing - Blake  
 Database Admin - Curtis  
 Usage Documentation - Curtis  
+Data acquisition, wget, JSoup - Jacob
 
 *These roles need to be filled*
 
 End points -  
 Example Client App -  
-Data acquisition, wget, JSoup -
 
 ### REST Endpoints
 
