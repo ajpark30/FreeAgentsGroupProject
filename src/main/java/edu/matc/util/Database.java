@@ -1,4 +1,4 @@
-package edu.matc.test.util;
+package edu.matc.util;
 
 import edu.matc.entity.Waterfall;
 import edu.matc.persistence.GenericDao;
