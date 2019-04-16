@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import edu.matc.test.util.Database;
 
 /**
  * This servlet routes the HTTP requests of a RESTful client app.
@@ -42,6 +43,25 @@ public class EntityTestServlet extends HttpServlet {
                 logger.debug(waterfall.getPhotos().get(0).toString());
                 out.println(waterfall.getPhotos().get(0).toString());
             }
+        }
+
+        Database database = Database.getInstance();
+        waterfalls = database.findNearest(0.0, 0.0);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
+        }
+
+        waterfalls = database.findNearest(90.0, 90.0);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
+        }
+
+        waterfalls = database.findNearest(90.0, 90.0);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
         }
     }
 
