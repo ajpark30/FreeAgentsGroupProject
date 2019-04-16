@@ -1,4 +1,5 @@
-CREATE TABLE zip_coords (zipcode VARCHAR(5), latitude DOUBLE, longitude DOUBLE);
+DROP TABLE IF EXISTS zip_coords;
+CREATE TABLE zip_coords (zipcode CHAR(5), latitude DOUBLE, longitude DOUBLE);
 INSERT INTO zip_coords (zipcode, latitude, longitude) VALUES
 ('00601', '18.180555', '-66.749961'),
 ('00602', '18.361945', '-67.175597'),

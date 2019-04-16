@@ -1,5 +1,6 @@
 package edu.matc.controller;
 
+import edu.matc.entity.Coordinates;
 import edu.matc.entity.Waterfall;
 import edu.matc.entity.Photo;
 import edu.matc.persistence.GenericDao;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import edu.matc.test.util.Database;
+import edu.matc.util.Database;
 
 /**
  * This servlet routes the HTTP requests of a RESTful client app.
@@ -63,6 +64,39 @@ public class EntityTestServlet extends HttpServlet {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
         }
+
+        waterfalls = database.findNearest(-90.0, -90.0);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
+        }
+
+        waterfalls = database.findNearest(-20.0, -120.0);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
+        }
+
+        Coordinates coords = database.coordsFromZipcode("53735");
+        logger.debug(coords.toString());
+        out.println(coords.toString());
+
+        waterfalls = database.findWaterfallsNear(coords);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
+        }
+
+        coords = database.coordsFromZipcode("90210");
+        logger.debug(coords.toString());
+        out.println(coords.toString());
+
+        waterfalls = database.findWaterfallsNear(coords);
+        for (Waterfall waterfall : waterfalls) {
+            logger.debug(waterfall.toString());
+            out.println(waterfall.toString());
+        }
+
     }
 
     @Override

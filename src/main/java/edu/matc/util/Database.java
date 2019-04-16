@@ -1,5 +1,6 @@
 package edu.matc.util;
 
+import edu.matc.entity.Coordinates;
 import edu.matc.entity.Waterfall;
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 /**
  * Provides access the database
  * Created on 8/31/16.
@@ -50,15 +52,30 @@ public class Database {
 
     }
 
-    // get the only Database object available
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
+// get the only Database object available
     public static Database getInstance() {
         return instance;
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         return connection;
     }
 
+    /**
+     * Connect.
+     *
+     * @throws Exception the exception
+     */
     public void connect() throws Exception {
         if (connection != null)
             return;
@@ -73,6 +90,9 @@ public class Database {
         connection = DriverManager.getConnection(url, properties.getProperty("username"),  properties.getProperty("password"));
     }
 
+    /**
+     * Disconnect.
+     */
     public void disconnect() {
         if (connection != null) {
             try {
@@ -86,10 +106,11 @@ public class Database {
     }
 
     /**
-     * Run the sql.
+     * Find nearest waterfalls to lat/lon.
      *
-     * @param latitude the decimal latitude
+     * @param latitude  the decimal latitude
      * @param longitude the decimal longitude
+     * @return the list of wtaerfalls
      */
     public List<Waterfall> findNearest(double latitude, double longitude) {
 
@@ -123,7 +144,7 @@ public class Database {
                             + " SELECT  "
                             + latitude + "/*input latitude*/  AS latpoint,"
                             + longitude + "/* input longitude */ AS longpoint,"
-                            + " 50000.0/* no narrowing with large value */ AS radius,"
+                            + " 50.0/* no narrowing with large value */ AS radius,"
                             + " /*111.045 for km*/ 69.0/* for miles*/ AS distance_unit"
                             + " ) AS p ON 1=1"
                             + " WHERE w.latitude"
@@ -135,7 +156,7 @@ public class Database {
                             + " ) AS d"
                             + " WHERE distance <= radius"
                             + " ORDER BY distance"
-                            + " LIMIT 15"
+                            + " LIMIT 5"
             );
 
             GenericDao<Waterfall> waterfallDao = new GenericDao(Waterfall.class);
@@ -152,6 +173,52 @@ public class Database {
             disconnect();
         }
         return waterfalls;
+    }
+
+    /**
+     * Find waterfalls near coordinates.
+     *
+     * @param coords the coords
+     * @return the list
+     */
+    public List<Waterfall> findWaterfallsNear(Coordinates coords) {
+        return this.findNearest(coords.getLatitude(), coords.getLongitude());
+    }
+
+    /**
+     * Coordinates from zipcode.
+     *
+     * @param zipcode the zipcode
+     * @return the coordinates
+     */
+    public Coordinates coordsFromZipcode(String zipcode) {
+        Coordinates coords = new Coordinates();
+
+        Statement stmt = null;
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            connect();
+            stmt = connection.createStatement();
+            String sql = "SELECT latitude, longitude FROM zip_coords WHERE zipcode LIKE '" + zipcode.substring(0, 3) + "%'";
+            ResultSet results = stmt.executeQuery(sql);
+
+            while (results.next()) {
+                coords.setLatitude(results.getDouble("latitude"));
+                coords.setLongitude(results.getDouble("longitude"));
+                System.out.println(coords.toString());
+            }
+
+        } catch (SQLException se) {
+            logger.error(se);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            disconnect();
+        }
+
+        return coords;
     }
 
     /**
