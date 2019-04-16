@@ -126,10 +126,10 @@ public class Database {
                     # after narrowing a range search with bounding boxes
                     # adapted from https://www.plumislandmedia.net/mysql/haversine-mysql-nearest-loc/
 */
-                    "SELECT waterfall_id,"
+                    "SELECT waterfall_id, "
                             + " latitude, longitude, distance"
                             + " FROM ("
-                                + " SELECT w.waterfall_id,"
+                                + " SELECT w.waterfall_id, "
                                 + " w.latitude, w.longitude,"
                                 + " p.radius,"
                                 + " p.distance_unit"
@@ -143,7 +143,7 @@ public class Database {
                                 + " SELECT  "
                                 + latitude + "/*input latitude*/  AS latpoint,"
                                 + longitude + "/* input longitude */ AS longpoint,"
-                                + " 50000.0 /* no narrowing with large value */ AS radius,"
+                                + " 15000.0 /* no narrowing with large value */ AS radius,"
                                 + " /*111.045 for km*/ 69.0/* for miles*/ AS distance_unit"
                             + " ) AS p ON 1=1"
                             + " WHERE w.latitude"
@@ -154,16 +154,19 @@ public class Database {
                                     + " AND p.longpoint + (p.radius / (p.distance_unit * COS(RADIANS(p.latpoint))))"
                             + " ) AS d"
                             + " WHERE distance <= radius"
-                            + " ORDER BY distance"
+                            + " ORDER BY distance ASC"
                             + " LIMIT 5";
 
             ResultSet results = stmt.executeQuery(sql);
 
             GenericDao<Waterfall> waterfallDao = new GenericDao(Waterfall.class);
             while (results.next()) {
-                int row = results.getRow();
-                System.out.println("Row: " + row);
+                int row = results.getInt("waterfall_id");
                 waterfalls.add(waterfallDao.getById(row));
+
+                logger.debug("Row: " + row
+                        + "\nDistance: " + results.getDouble("distance")
+                );
             }
         } catch (SQLException se) {
             logger.error(se);
