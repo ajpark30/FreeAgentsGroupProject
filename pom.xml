@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>waterfallRest Maven Webapp</name>
+  <name>Waterfall Rest</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

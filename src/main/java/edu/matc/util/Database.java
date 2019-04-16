@@ -113,7 +113,6 @@ public class Database {
      * @return the list of wtaerfalls
      */
     public List<Waterfall> findNearest(double latitude, double longitude) {
-
         List<Waterfall> waterfalls = new ArrayList<>();
         Statement stmt = null;
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -122,42 +121,43 @@ public class Database {
             Class.forName("com.mysql.jdbc.Driver");
             connect();
             stmt = connection.createStatement();
-            ResultSet results = stmt.executeQuery(
+            String sql =
 /*                  # find nearest object to coordinates using great circle distance
                     # after narrowing a range search with bounding boxes
                     # adapted from https://www.plumislandmedia.net/mysql/haversine-mysql-nearest-loc/
 */
                     "SELECT waterfall_id,"
-                    + " latitude, longitude, distance"
-                    + " FROM ("
-                    + " SELECT w.waterfall_id,"
-                            + " w.latitude, w.longitude,"
-                            + " p.radius,"
-                            + " p.distance_unit"
-                            + " * DEGREES(ACOS(COS(RADIANS(p.latpoint))"
-                            + " * COS(RADIANS(w.latitude))"
-                            + " * COS(RADIANS(p.longpoint - w.longitude))"
-                            + " + SIN(RADIANS(p.latpoint))"
-                            + " * SIN(RADIANS(w.latitude)))) AS distance"
-                            + " FROM waterfall AS w"
+                            + " latitude, longitude, distance"
+                            + " FROM ("
+                                + " SELECT w.waterfall_id,"
+                                + " w.latitude, w.longitude,"
+                                + " p.radius,"
+                                + " p.distance_unit"
+                                + " * DEGREES(ACOS(COS(RADIANS(p.latpoint))"
+                                + " * COS(RADIANS(w.latitude))"
+                                + " * COS(RADIANS(p.longpoint - w.longitude))"
+                                + " + SIN(RADIANS(p.latpoint))"
+                                + " * SIN(RADIANS(w.latitude)))) AS distance"
+                                + " FROM waterfall AS w"
                             + " JOIN (   /* these are the query parameters */"
-                            + " SELECT  "
-                            + latitude + "/*input latitude*/  AS latpoint,"
-                            + longitude + "/* input longitude */ AS longpoint,"
-                            + " 50.0/* no narrowing with large value */ AS radius,"
-                            + " /*111.045 for km*/ 69.0/* for miles*/ AS distance_unit"
+                                + " SELECT  "
+                                + latitude + "/*input latitude*/  AS latpoint,"
+                                + longitude + "/* input longitude */ AS longpoint,"
+                                + " 50000.0 /* no narrowing with large value */ AS radius,"
+                                + " /*111.045 for km*/ 69.0/* for miles*/ AS distance_unit"
                             + " ) AS p ON 1=1"
                             + " WHERE w.latitude"
-                            + " BETWEEN p.latpoint  - (p.radius / p.distance_unit)"
-                            + " AND p.latpoint  + (p.radius / p.distance_unit)"
-                            + " AND w.longitude"
-                            + " BETWEEN p.longpoint - (p.radius / (p.distance_unit * COS(RADIANS(p.latpoint))))"
-                            + " AND p.longpoint + (p.radius / (p.distance_unit * COS(RADIANS(p.latpoint))))"
+                                + " BETWEEN p.latpoint  - (p.radius / p.distance_unit)"
+                                    + " AND p.latpoint  + (p.radius / p.distance_unit)"
+                                    + " AND w.longitude"
+                                + " BETWEEN p.longpoint - (p.radius / (p.distance_unit * COS(RADIANS(p.latpoint))))"
+                                    + " AND p.longpoint + (p.radius / (p.distance_unit * COS(RADIANS(p.latpoint))))"
                             + " ) AS d"
                             + " WHERE distance <= radius"
                             + " ORDER BY distance"
-                            + " LIMIT 5"
-            );
+                            + " LIMIT 5";
+
+            ResultSet results = stmt.executeQuery(sql);
 
             GenericDao<Waterfall> waterfallDao = new GenericDao(Waterfall.class);
             while (results.next()) {
@@ -207,7 +207,6 @@ public class Database {
             while (results.next()) {
                 coords.setLatitude(results.getDouble("latitude"));
                 coords.setLongitude(results.getDouble("longitude"));
-                System.out.println(coords.toString());
             }
 
         } catch (SQLException se) {

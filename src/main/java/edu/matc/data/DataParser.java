@@ -4,10 +4,11 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.jsoup.select.Selector;
 
 public class DataParser {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
 
         Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/List_of_waterfalls").get();
         /*

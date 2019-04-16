@@ -37,6 +37,7 @@ public class EntityTestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Waterfall> waterfalls = waterfallDao.getAll();
         PrintWriter out = resp.getWriter();
+        /*
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
@@ -45,15 +46,9 @@ public class EntityTestServlet extends HttpServlet {
                 out.println(waterfall.getPhotos().get(0).toString());
             }
         }
-
+*/
         Database database = Database.getInstance();
         waterfalls = database.findNearest(0.0, 0.0);
-        for (Waterfall waterfall : waterfalls) {
-            logger.debug(waterfall.toString());
-            out.println(waterfall.toString());
-        }
-
-        waterfalls = database.findNearest(90.0, 90.0);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
@@ -71,7 +66,7 @@ public class EntityTestServlet extends HttpServlet {
             out.println(waterfall.toString());
         }
 
-        waterfalls = database.findNearest(-20.0, -120.0);
+        waterfalls = database.findNearest(45.0, -120.0);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
