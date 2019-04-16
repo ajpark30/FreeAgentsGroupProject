@@ -35,7 +35,7 @@ Home page - index.jsp created with waterfallResults.jsp
 Results List
 - Display nearest falls in order by distance
 
-### Create a hardcoded database
+### Create a hardcoded database (done)
 We want to be able to have some data our REST can display to get credit for week 9 Exercise
 
-*Two or three falls would be enough to show the closest*
+*Two or three falls would be enough to show the closest* (done)
