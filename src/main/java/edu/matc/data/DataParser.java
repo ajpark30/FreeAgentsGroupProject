@@ -44,7 +44,7 @@ public class DataParser {
 
     private void processLinks(String urls) throws IOException {
         Document doc = Jsoup.connect(urls).get();
-        String latLng = doc.body().getElementsByClassName("geo");
+        String latLng = doc.body().getElementsByClass("geo-dec").toString();
 
 
     }
