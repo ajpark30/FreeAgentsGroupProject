@@ -11,11 +11,13 @@ import javax.ws.rs.core.Response;
 public class waterfallByLocation {
     // The Java method will process HTTP GET requests
     @GET
+    @Path("/{param}")
     // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/plain")
-    public Response getMessage() {
+    public Response getMessage(@PathParam("param") String msg) {
+
         // Return a simple message
-        String output = "I'm a waterfall location?";
+        String output = "What waterfall location did you pass? " + msg;
         return Response.status(200).entity(output).build();
     }
 
