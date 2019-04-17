@@ -228,33 +228,33 @@ public class Database {
      *
      * @param sqlFile the sql file to be read and executed line by line
      */
-    public void runSQL(String sqlFile) {
-
-        Statement stmt = null;
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream inputStream = classloader.getResourceAsStream(sqlFile);
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            Class.forName("com.mysql.jdbc.Driver");
-            connect();
-            stmt = connection.createStatement();
-
-            while (true) {
-                String sql = br.readLine();
-                if (sql == null) {
-                    break;
-                }
-                stmt.executeUpdate(sql);
-
-            }
-
-        } catch (SQLException se) {
-            logger.error(se);
-        } catch (Exception e) {
-            logger.error(e);
-        } finally {
-            disconnect();
-        }
-
-    }
+//    public void runSQL(String sqlFile) {
+//
+//        Statement stmt = null;
+//        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+//        InputStream inputStream = classloader.getResourceAsStream(sqlFile);
+//        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+//
+//            Class.forName("com.mysql.jdbc.Driver");
+//            connect();
+//            stmt = connection.createStatement();
+//
+//            while (true) {
+//                String sql = br.readLine();
+//                if (sql == null) {
+//                    break;
+//                }
+//                stmt.executeUpdate(sql);
+//
+//            }
+//
+//        } catch (SQLException se) {
+//            logger.error(se);
+//        } catch (Exception e) {
+//            logger.error(e);
+//        } finally {
+//            disconnect();
+//        }
+//
+//    }
 }

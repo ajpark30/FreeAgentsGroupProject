@@ -47,8 +47,8 @@ public class EntityTestServlet extends HttpServlet {
             }
         }
 */
-        logger.debug("Waterfalls closest to 0,0");
-        out.println("Waterfalls closest to 0,0");
+        logger.debug("\nWaterfalls closest to 0,0");
+        out.println("\nWaterfalls closest to 0,0");
         Database database = Database.getInstance();
         waterfalls = database.findNearest(0.0, 0.0);
         for (Waterfall waterfall : waterfalls) {
@@ -56,48 +56,48 @@ public class EntityTestServlet extends HttpServlet {
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to 90,90");
-        out.println("Waterfalls closest to 90,90");
+        logger.debug("\nWaterfalls closest to 90,90");
+        out.println("\nWaterfalls closest to 90,90");
         waterfalls = database.findNearest(90.0, 90.0);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to -90,-90");
-        out.println("Waterfalls closest to -90,-90");
+        logger.debug("\nWaterfalls closest to -90,-90");
+        out.println("\nWaterfalls closest to -90,-90");
         waterfalls = database.findNearest(-90.0, -90.0);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to 45,-120");
-        out.println("Waterfalls closest to 45,-120");
+        logger.debug("\nWaterfalls closest to 45,-120");
+        out.println("\nWaterfalls closest to 45,-120");
         waterfalls = database.findNearest(45.0, -120.0);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to 8.7,55.5");
-        out.println("Waterfalls closest to 8.7,55.5");
+        logger.debug("\nWaterfalls closest to 8.7,55.5");
+        out.println("\nWaterfalls closest to 8.7,55.5");
         waterfalls = database.findNearest(8.7, 55.5);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to 23.3,85.6");
-        out.println("Waterfalls closest to 23.3,85.6");
+        logger.debug("\nWaterfalls closest to 23.3,85.6");
+        out.println("\nWaterfalls closest to 23.3,85.6");
         waterfalls = database.findNearest(23.3, 85.6);
         for (Waterfall waterfall : waterfalls) {
             logger.debug(waterfall.toString());
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to 53735");
-        out.println("Waterfalls closest to 53735");
+        logger.debug("\nWaterfalls closest to 53735");
+        out.println("\nWaterfalls closest to 53735");
         Coordinates coords = database.coordsFromZipcode("53735");
         logger.debug(coords.toString());
         out.println(coords.toString());
@@ -108,8 +108,8 @@ public class EntityTestServlet extends HttpServlet {
             out.println(waterfall.toString());
         }
 
-        logger.debug("Waterfalls closest to 90210");
-        out.println("Waterfalls closest to 90210");
+        logger.debug("\nWaterfalls closest to 90210");
+        out.println("\nWaterfalls closest to 90210");
         coords = database.coordsFromZipcode("90210");
         logger.debug(coords.toString());
         out.println(coords.toString());
