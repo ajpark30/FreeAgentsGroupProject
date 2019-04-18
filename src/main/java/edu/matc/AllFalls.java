@@ -1,6 +1,7 @@
 package edu.matc;
 
 import edu.matc.entity.Waterfall;
+
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/allFalls")
+@Path("/findAllFalls")
 public class AllFalls {
 
     private final Logger logger = LogManager.getLogger(this.getClass());

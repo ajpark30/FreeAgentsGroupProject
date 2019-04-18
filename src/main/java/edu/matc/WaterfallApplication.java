@@ -2,6 +2,7 @@ package edu.matc;
 
 import edu.matc.entity.Waterfall;
 import edu.matc.persistence.GenericDao;
+import org.eclipse.persistence.internal.oxm.schema.model.All;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -19,6 +20,7 @@ public class WaterfallApplication extends Application {
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(ByLocation.class );
+        h.add(AllFalls.class);
         return h;
     }
 }
