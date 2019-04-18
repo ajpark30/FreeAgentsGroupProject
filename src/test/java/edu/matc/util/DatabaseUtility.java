@@ -1,4 +1,4 @@
-package resources;
+package edu.matc.util;
 
 import java.io.*;
 import java.sql.Connection;

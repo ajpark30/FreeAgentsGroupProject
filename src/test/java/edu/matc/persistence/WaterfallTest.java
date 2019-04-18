@@ -1,7 +1,7 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Waterfall;
-import resources.DatabaseUtility;
+import edu.matc.util.DatabaseUtility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
