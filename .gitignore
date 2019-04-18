@@ -2,4 +2,4 @@
 target/*
 work/*
 logs/*
-waterfallRest.iml
+*.iml

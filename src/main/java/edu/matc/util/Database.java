@@ -110,9 +110,9 @@ public class Database {
      *
      * @param latitude  the decimal latitude
      * @param longitude the decimal longitude
-     * @return the list of wtaerfalls
+     * @return the list of waterfalls
      */
-    public List<Waterfall> findNearest(double latitude, double longitude) {
+    public List<Waterfall> findNearest(double latitude, double longitude, int resultCount) {
         List<Waterfall> waterfalls = new ArrayList<>();
         Statement stmt = null;
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -155,7 +155,7 @@ public class Database {
                             + " ) AS d"
                             + " WHERE distance <= radius"
                             + " ORDER BY distance ASC"
-                            + " LIMIT 5";
+                            + " LIMIT " + resultCount;
 
             ResultSet results = stmt.executeQuery(sql);
 
@@ -176,6 +176,17 @@ public class Database {
             disconnect();
         }
         return waterfalls;
+    }
+
+    /**
+     * Find waterfalls near coordinates.
+     *
+     * @param latitude the latitude
+     * @param longitude the longitude
+     * @return the list of waterfalls
+     */
+    public List<Waterfall> findNearest(double latitude, double longitude) {
+        return this.findNearest(latitude, longitude, 5);
     }
 
     /**
