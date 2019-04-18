@@ -24,6 +24,8 @@ import java.util.Properties;
 
 public class Database {
 
+    private final int DEFAULT_RESULTS_COUNT = 10;
+
     private final Logger logger = LogManager.getLogger(this.getClass());
     // create an object of the class Database
     private static Database instance = new Database();
@@ -143,7 +145,7 @@ public class Database {
                                 + " SELECT  "
                                 + latitude + "/*input latitude*/  AS latpoint,"
                                 + longitude + "/* input longitude */ AS longpoint,"
-                                + " 15000.0 /* no narrowing with large value */ AS radius,"
+                                + " 15000.0 /* no narrowing with large value, more results; use a smaller value for performance */ AS radius,"
                                 + " /*111.045 for km*/ 69.0/* for miles*/ AS distance_unit"
                             + " ) AS p ON 1=1"
                             + " WHERE w.latitude"
@@ -186,7 +188,7 @@ public class Database {
      * @return the list of waterfalls
      */
     public List<Waterfall> findNearest(double latitude, double longitude) {
-        return this.findNearest(latitude, longitude, 5);
+        return this.findNearest(latitude, longitude, DEFAULT_RESULTS_COUNT);
     }
 
     /**
@@ -196,7 +198,17 @@ public class Database {
      * @return the list
      */
     public List<Waterfall> findWaterfallsNear(Coordinates coords) {
-        return this.findNearest(coords.getLatitude(), coords.getLongitude());
+        return this.findNearest(coords.getLatitude(), coords.getLongitude(), DEFAULT_RESULTS_COUNT);
+    }
+
+    /**
+     * Find waterfalls near coordinates.
+     *
+     * @param coords the coords
+     * @return the list
+     */
+    public List<Waterfall> findWaterfallsNear(Coordinates coords, int resultCount) {
+        return this.findNearest(coords.getLatitude(), coords.getLongitude(), resultCount);
     }
 
     /**
