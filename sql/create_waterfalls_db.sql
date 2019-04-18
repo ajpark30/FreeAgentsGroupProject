@@ -52,6 +52,7 @@ CREATE TABLE photo (
 	height INT DEFAULT 0,
 	width INT DEFAULT 0,
   CONSTRAINT waterfall_photo_cx FOREIGN KEY (waterfall_id) REFERENCES waterfall (waterfall_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
