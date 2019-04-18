@@ -1,4 +1,4 @@
-package edu.matc.util;
+package resources;
 
 import java.io.*;
 import java.sql.Connection;
@@ -12,10 +12,10 @@ import java.util.Properties;
  */
 public class DatabaseUtility {
 
-    private static final String PROPS_PATH = "dbutil.properties";
     private static final char DELIMITER = ';';
     private static final String DRIVER= "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/waterfall";
+    private static final String DB_NAME = "waterfall";
+    private static final String URL = "jdbc:mysql://localhost:3306/" + DB_NAME;
 
 
     /**
@@ -26,8 +26,6 @@ public class DatabaseUtility {
     public void runSQL(String sqlFile) {
         Connection conn = null;
         Statement stmt = null;
-
-//        Properties props = loadProperties();
 
         try (BufferedReader br = new BufferedReader(new FileReader(sqlFile))) {
 
@@ -52,13 +50,13 @@ public class DatabaseUtility {
             stmt.executeBatch();
 
         } catch (FileNotFoundException fe) {
-
+            fe.printStackTrace();
         } catch (SQLException se) {
-
+            se.printStackTrace();
         } catch (IOException ioe) {
-
+            ioe.printStackTrace();
         } catch (ClassNotFoundException cnf) {
-
+            cnf.printStackTrace();
         }
 
     }
@@ -72,7 +70,7 @@ public class DatabaseUtility {
         Properties props = new Properties();
 
         try {
-            props.load(this.getClass().getResourceAsStream(PROPS_PATH));
+            props.load(this.getClass().getResourceAsStream("..."));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (Exception e) {
