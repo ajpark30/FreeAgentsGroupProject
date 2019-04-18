@@ -2,6 +2,7 @@ package edu.matc.persistence;
 
 import edu.matc.entity.Waterfall;
 import edu.matc.util.DatabaseUtility;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +15,18 @@ public class WaterfallTest {
     @BeforeEach
     public void setUp() {
         dao = new GenericDao<>(Waterfall.class);
-
         DatabaseUtility dbUtil = new DatabaseUtility();
-//        dbUtil.runSQL("create_waterfalls_db.sql");
-dbUtil.runSQL("waterfallSetup.sql");
+
+        dbUtil.runSQL("target/test-classes/waterfallSetup.sql");
     }
+
+    @AfterAll
+    public static void tearDown() {
+        DatabaseUtility dbUtil = new DatabaseUtility();
+        dbUtil.runSQL("target/test-classes/create_waterfalls_db.sql");
+    }
+
+
 
     @Test
     public void testGetByPropertyEqual() {

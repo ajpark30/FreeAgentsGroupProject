@@ -13,10 +13,7 @@ import java.util.Properties;
 public class DatabaseUtility {
 
     private static final char DELIMITER = ';';
-    private static final String DRIVER= "com.mysql.jdbc.Driver";
-    private static final String DB_NAME = "waterfall";
-    private static final String URL = "jdbc:mysql://localhost:3306/" + DB_NAME;
-
+    private static final String PROPS_LOCATION = "/dbutil.properties";
 
     /**
      * Run the sql.
@@ -26,12 +23,13 @@ public class DatabaseUtility {
     public void runSQL(String sqlFile) {
         Connection conn = null;
         Statement stmt = null;
+        Properties props = loadProperties();
 
         try (BufferedReader br = new BufferedReader(new FileReader(sqlFile))) {
 
-            Class.forName(DRIVER);
+        Class.forName(props.getProperty("jdbc.driver"));
 
-            conn = DriverManager.getConnection(URL);
+            conn = DriverManager.getConnection(props.getProperty("db.url"), props);
             stmt = conn.createStatement();
             String sql = "";
 
@@ -70,7 +68,7 @@ public class DatabaseUtility {
         Properties props = new Properties();
 
         try {
-            props.load(this.getClass().getResourceAsStream("..."));
+            props.load(this.getClass().getResourceAsStream(PROPS_LOCATION));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (Exception e) {
