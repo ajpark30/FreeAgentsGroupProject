@@ -1,5 +1,5 @@
 .idea/*
 target/*
 work/*
-
-
+logs/*
+*.iml
