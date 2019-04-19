@@ -39,7 +39,7 @@ CREATE TABLE `photo` (
   `width` int(11) DEFAULT '0',
   PRIMARY KEY (`photo_id`),
   KEY `waterfall_photo_cx` (`waterfall_id`),
-  CONSTRAINT `waterfall_photo_cx` FOREIGN KEY (`waterfall_id`) REFERENCES `waterfall` (`waterfall_id`)
+  CONSTRAINT `waterfall_photo_cx` FOREIGN KEY (`waterfall_id`) REFERENCES `waterfall` (`waterfall_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
