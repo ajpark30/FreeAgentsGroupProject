@@ -62,7 +62,17 @@ public class PhotoTest {
         assertEquals(2, photos.size());
     }
 
+    @Test
     public void testUpdate() {
+        Photo photo = dao.getById(2);
+        photo.setHeight(8000);
+
+        dao.saveOrUpdate(photo);
+
+        Photo updatedPhoto = dao.getById(2);
+
+        assertNotEquals(null, updatedPhoto);
+        assertEquals(8000, photo.getHeight());
     }
 
     public void testInsert() {
