@@ -1,19 +1,18 @@
 package edu.matc.persistence;
 
-public class UserTest {
+public class PhotoTest {
+
     public void setUp() {
+    }
+
+    public void testGetById() {
     }
 
     public void testGetByPropertyEqual() {
     }
 
-//   These tests will be used if the DAO
-//   has methods for them
-//    public void testGetByPropertyLike() {
-//    }
-//
-//    public void testGetByProperties() {
-//    }
+    public void testGetByPropertyLike() {
+    }
 
     public void testGetAll() {
     }
