@@ -7,15 +7,14 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class PhotoTest {
 
     private GenericDao<Photo> dao;
+    private GenericDao<Waterfall> waterfallDao;
 
     @BeforeAll
     @AfterAll
@@ -75,14 +74,34 @@ public class PhotoTest {
         assertEquals(8000, photo.getHeight());
     }
 
+    @Test
     public void testInsert() {
+        setUpWaterfallDao();
+
+        Photo photoToAdd = new Photo();
+        photoToAdd.setWaterfall(waterfallDao.getById(2));
+        photoToAdd.setSourceURL("https://en.wikipedia.org/foo.png");
+
+        int id = dao.insert(photoToAdd);
+
+        Photo foundPhoto = dao.getById(id);
+
+        assertNotEquals(null, foundPhoto);
+        assertEquals(photoToAdd.toString(), foundPhoto.toString());
     }
 
+    @Test
     public void testDelete() {
+        Photo photoToDelete = dao.getById(2);
+        dao.delete(photoToDelete);
+
+        Photo photoSearch = dao.getById(2);
+
+        assertEquals(null, photoSearch);
     }
 
     private Photo getMockPhoto() {
-        GenericDao<Waterfall> waterfallDao = new GenericDao<>(Waterfall.class);
+        setUpWaterfallDao();
 
         Photo mockPhoto = new Photo();
         mockPhoto.setPhotoId(1);
@@ -90,6 +109,10 @@ public class PhotoTest {
         mockPhoto.setSourceURL("https://upload.wikimedia.org/wikipedia/commons/3/3a/GrandfatherExposedPreCambrian.jpg");
 
         return mockPhoto;
+    }
+
+    private void setUpWaterfallDao() {
+        waterfallDao = new GenericDao<>(Waterfall.class);
     }
 
 }
