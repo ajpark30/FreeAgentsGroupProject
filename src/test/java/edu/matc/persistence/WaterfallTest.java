@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WaterfallTest {
@@ -43,12 +42,12 @@ public class WaterfallTest {
         assertEquals(mockWaterfall.toString(), foundWaterfalls.get(0).toString());
     }
 
-
+    @Test
     public void testGetByPropertyLike() {
+        List<Waterfall> foundWaterfalls = dao.getByPropertyLike("name", "an");
+        assertEquals(2, foundWaterfalls.size());
     }
 
-    public void testGetByProperties() {
-    }
 
     @Test
     public void testUpdate() {
@@ -84,11 +83,23 @@ public class WaterfallTest {
         assertEquals(1, foundWaterfalls.get(0).getPhotos().size());
     }
 
+    @Test
     public void testDelete() {
+        setUpDeleteTest();
 
+        Waterfall waterfallToDelete = dao.getByPropertyEqual("waterfall_id", "1").get(0);
+        dao.delete(waterfallToDelete);
+
+        List<Waterfall> waterfallSearch = dao.getByPropertyEqual("waterfall_id", "1");
+        List<Photo> photoSearch = photoDao.getByPropertyEqual("photo_id", "2");
+
+        assertEquals(0, waterfallSearch.size());
+        assertEquals(0, photoSearch.size());
     }
 
     private void setUpDeleteTest() {
+        DatabaseUtility dbUtil = new DatabaseUtility();
+        dbUtil.runSQL("target/test-classes/photoSetup.sql");
         photoDao = new GenericDao<>(Photo.class);
     }
 
