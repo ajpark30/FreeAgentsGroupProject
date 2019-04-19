@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class PhotoTest {
 
@@ -40,16 +41,25 @@ public class PhotoTest {
         assertEquals(mockPhoto.toString(), foundPhotos.get(0).toString());
     }
 
+    @Test
     public void testGetById() {
+        Photo mockPhoto = getMockPhoto();
+        Photo photo = dao.getById(1);
+
+        assertNotEquals(null, photo);
+        assertEquals(mockPhoto.toString(), photo.toString());
     }
 
     @Test
     public void testGetByPropertyLike() {
-        List<Photo> foundPhotos = dao.getByPropertyLike("sourceURL", "wikipedia");
-        assertEquals(2, foundPhotos.size());
+        List<Photo> photos = dao.getByPropertyLike("sourceURL", "wikipedia");
+        assertEquals(2, photos.size());
     }
 
+    @Test
     public void testGetAll() {
+        List<Photo> photos = dao.getAll();
+        assertEquals(2, photos.size());
     }
 
     public void testUpdate() {
