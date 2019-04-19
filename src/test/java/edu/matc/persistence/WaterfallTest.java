@@ -148,6 +148,11 @@ public class WaterfallTest {
         photoDao = new GenericDao<>(Photo.class);
     }
 
+    /**
+     * Get mock waterfall.
+     *
+     * @return the waterfall
+     */
     private Waterfall getMockWaterfall() {
         Waterfall mockWaterfall = new Waterfall("Kalandula Falls", -9.07583f, 16.0033f);
         mockWaterfall.setWaterfallId(1);

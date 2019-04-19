@@ -11,11 +11,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * The Photo entity test.
+ */
 public class PhotoTest {
 
     private GenericDao<Photo> dao;
     private GenericDao<Waterfall> waterfallDao;
 
+    /**
+     * Reset database.
+     */
     @BeforeAll
     @AfterAll
     public static void resetDatabase() {
@@ -23,6 +29,9 @@ public class PhotoTest {
         dbUtil.runSQL("target/test-classes/create_waterfalls_db.sql");
     }
 
+    /**
+     * Set up each test.
+     */
     @BeforeEach
     public void setUp() {
         dao = new GenericDao<>(Photo.class);
@@ -30,6 +39,9 @@ public class PhotoTest {
         dbUtil.runSQL("target/test-classes/photoSetup.sql");
     }
 
+    /**
+     * Test get by property equal.
+     */
     @Test
     public void testGetByPropertyEqual() {
         Photo mockPhoto = getMockPhoto();
@@ -40,6 +52,9 @@ public class PhotoTest {
         assertEquals(mockPhoto.toString(), foundPhotos.get(0).toString());
     }
 
+    /**
+     * Test get by id.
+     */
     @Test
     public void testGetById() {
         Photo mockPhoto = getMockPhoto();
@@ -49,18 +64,27 @@ public class PhotoTest {
         assertEquals(mockPhoto.toString(), photo.toString());
     }
 
+    /**
+     * Test get by property like.
+     */
     @Test
     public void testGetByPropertyLike() {
         List<Photo> photos = dao.getByPropertyLike("sourceURL", "wikipedia");
         assertEquals(2, photos.size());
     }
 
+    /**
+     * Test get all.
+     */
     @Test
     public void testGetAll() {
         List<Photo> photos = dao.getAll();
         assertEquals(2, photos.size());
     }
 
+    /**
+     * Test update.
+     */
     @Test
     public void testUpdate() {
         Photo photo = dao.getById(2);
@@ -74,6 +98,9 @@ public class PhotoTest {
         assertEquals(8000, photo.getHeight());
     }
 
+    /**
+     * Test insert.
+     */
     @Test
     public void testInsert() {
         setUpWaterfallDao();
@@ -90,6 +117,9 @@ public class PhotoTest {
         assertEquals(photoToAdd.toString(), foundPhoto.toString());
     }
 
+    /**
+     * Test delete.
+     */
     @Test
     public void testDelete() {
         Photo photoToDelete = dao.getById(2);
@@ -100,6 +130,11 @@ public class PhotoTest {
         assertEquals(null, photoSearch);
     }
 
+    /**
+     * Get mock photo.
+     *
+     * @return the photo
+     */
     private Photo getMockPhoto() {
         setUpWaterfallDao();
 
@@ -111,6 +146,9 @@ public class PhotoTest {
         return mockPhoto;
     }
 
+    /**
+     * Set up the waterfall dao.
+     */
     private void setUpWaterfallDao() {
         waterfallDao = new GenericDao<>(Waterfall.class);
     }
