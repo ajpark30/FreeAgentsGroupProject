@@ -10,7 +10,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * The Waterfall entity test.
@@ -47,13 +50,25 @@ public class WaterfallTest {
      */
     @Test
     public void testGetByPropertyEqual() {
-        Waterfall mockWaterfall = new Waterfall("Kalandula Falls", -9.07583f, 16.0033f);
-        mockWaterfall.setWaterfallId(1);
+        Waterfall mockWaterfall = getMockWaterfall();
 
         List<Waterfall> foundWaterfalls = dao.getByPropertyEqual("waterfall_id", "1");
 
         assertEquals(1, foundWaterfalls.size());
         assertEquals(mockWaterfall.toString(), foundWaterfalls.get(0).toString());
+    }
+
+    /**
+     * Test get by id.
+     */
+    @Test
+    public void testGetById() {
+        Waterfall mockWaterfall = getMockWaterfall();
+
+        Waterfall foundWaterfall = dao.getById(1);
+
+        assertNotEquals(null, foundWaterfall);
+        assertEquals(foundWaterfall.toString(), mockWaterfall.toString());
     }
 
     /**
@@ -133,6 +148,12 @@ public class WaterfallTest {
         DatabaseUtility dbUtil = new DatabaseUtility();
         dbUtil.runSQL("target/test-classes/photoSetup.sql");
         photoDao = new GenericDao<>(Photo.class);
+    }
+
+    private Waterfall getMockWaterfall() {
+        Waterfall mockWaterfall = new Waterfall("Kalandula Falls", -9.07583f, 16.0033f);
+        mockWaterfall.setWaterfallId(1);
+        return mockWaterfall;
     }
 
 }
