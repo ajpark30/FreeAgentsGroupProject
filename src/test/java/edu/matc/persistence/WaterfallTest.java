@@ -12,11 +12,19 @@ import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The Waterfall entity test.
+ *
+ * @author bsinner
+ */
 public class WaterfallTest {
 
     private GenericDao<Waterfall> dao;
     private GenericDao<Photo> photoDao;
 
+    /**
+     * Reset database.
+     */
     @BeforeAll
     @AfterAll
     public static void resetDatabase() {
@@ -24,6 +32,9 @@ public class WaterfallTest {
         dbUtil.runSQL("target/test-classes/create_waterfalls_db.sql");
     }
 
+    /**
+     * Sets up each test.
+     */
     @BeforeEach
     public void setUpEach() {
         dao = new GenericDao<>(Waterfall.class);
@@ -31,6 +42,9 @@ public class WaterfallTest {
         dbUtil.runSQL("target/test-classes/waterfallSetup.sql");
     }
 
+    /**
+     * Test get by property equal.
+     */
     @Test
     public void testGetByPropertyEqual() {
         Waterfall mockWaterfall = new Waterfall("Kalandula Falls", -9.07583f, 16.0033f);
@@ -42,6 +56,9 @@ public class WaterfallTest {
         assertEquals(mockWaterfall.toString(), foundWaterfalls.get(0).toString());
     }
 
+    /**
+     * Test get by property like.
+     */
     @Test
     public void testGetByPropertyLike() {
         List<Waterfall> foundWaterfalls = dao.getByPropertyLike("name", "an");
@@ -49,6 +66,9 @@ public class WaterfallTest {
     }
 
 
+    /**
+     * Test update.
+     */
     @Test
     public void testUpdate() {
         Waterfall waterfall = dao.getByPropertyEqual("waterfall_id", "1").get(0);
@@ -62,12 +82,18 @@ public class WaterfallTest {
         assertEquals(333.33f, foundWaterfalls.get(0).getLongitude());
     }
 
+    /**
+     * Test get all.
+     */
     @Test
     public void testGetAll() {
         List<Waterfall> waterfalls = dao.getAll();
         assertEquals(4, waterfalls.size());
     }
 
+    /**
+     * Test insert with a photo.
+     */
     @Test
     public void testInsert() {
         Waterfall waterfallToAdd = new Waterfall("Foo Falls", -10.002f, 34.394f);
@@ -83,6 +109,9 @@ public class WaterfallTest {
         assertEquals(1, foundWaterfalls.get(0).getPhotos().size());
     }
 
+    /**
+     * Test delete, test photo cascade delete.
+     */
     @Test
     public void testDelete() {
         setUpDeleteTest();
@@ -97,6 +126,9 @@ public class WaterfallTest {
         assertEquals(0, photoSearch.size());
     }
 
+    /**
+     * Set up photoDao and photo table.
+     */
     private void setUpDeleteTest() {
         DatabaseUtility dbUtil = new DatabaseUtility();
         dbUtil.runSQL("target/test-classes/photoSetup.sql");
