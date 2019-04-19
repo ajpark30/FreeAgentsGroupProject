@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -86,15 +84,15 @@ public class WaterfallTest {
      */
     @Test
     public void testUpdate() {
-        Waterfall waterfall = dao.getByPropertyEqual("waterfall_id", "1").get(0);
+        Waterfall waterfall = dao.getById(1);
         waterfall.setLongitude(333.33f);
 
         dao.saveOrUpdate(waterfall);
 
-        List<Waterfall> foundWaterfalls = dao.getByPropertyEqual("waterfall_id", "1");
+        Waterfall foundWaterfall = dao.getById(1);
 
-        assertEquals(1, foundWaterfalls.size());
-        assertEquals(333.33f, foundWaterfalls.get(0).getLongitude());
+        assertNotEquals(null, foundWaterfall);
+        assertEquals(333.33f, foundWaterfall.getLongitude());
     }
 
     /**
@@ -117,11 +115,11 @@ public class WaterfallTest {
         waterfallToAdd.setPhotos(new ArrayList<>(Arrays.asList(p)));
 
         int id = dao.insert(waterfallToAdd);
-        List<Waterfall> foundWaterfalls = dao.getByPropertyEqual("waterfall_id", String.valueOf(id));
+        Waterfall foundWaterfall = dao.getById(id);
 
-        assertEquals(1, foundWaterfalls.size());
-        assertEquals(waterfallToAdd.toString(), foundWaterfalls.get(0).toString());
-        assertEquals(1, foundWaterfalls.get(0).getPhotos().size());
+        assertNotEquals(null, foundWaterfall);
+        assertEquals(waterfallToAdd.toString(), foundWaterfall.toString());
+        assertEquals(1, foundWaterfall.getPhotos().size());
     }
 
     /**
@@ -131,14 +129,14 @@ public class WaterfallTest {
     public void testDelete() {
         setUpDeleteTest();
 
-        Waterfall waterfallToDelete = dao.getByPropertyEqual("waterfall_id", "1").get(0);
+        Waterfall waterfallToDelete = dao.getById(1);
         dao.delete(waterfallToDelete);
 
-        List<Waterfall> waterfallSearch = dao.getByPropertyEqual("waterfall_id", "1");
-        List<Photo> photoSearch = photoDao.getByPropertyEqual("photo_id", "2");
+        Waterfall waterfallSearch = dao.getById(1);
+        Photo photoSearch = photoDao.getById(2);
 
-        assertEquals(0, waterfallSearch.size());
-        assertEquals(0, photoSearch.size());
+        assertEquals(null, waterfallSearch);
+        assertEquals(null, photoSearch);
     }
 
     /**
