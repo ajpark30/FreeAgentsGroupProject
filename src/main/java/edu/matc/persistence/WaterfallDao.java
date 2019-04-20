@@ -139,10 +139,23 @@ public class WaterfallDao extends GenericDao {
      * Find waterfalls near coordinates.
      *
      * @param coords the coords
+     * @param resultCount the maximum number of results to return
      * @return the list
      */
     public List<Waterfall> findWaterfallsNear(Coordinates coords, int resultCount) {
         return this.findNearest(coords.getLatitude(), coords.getLongitude(), resultCount, DEFAULT_WITHIN_DISTANCE);
+    }
+
+    /**
+     * Find waterfalls near coordinates.
+     *
+     * @param coords the coords
+     * @param resultCount the maximum number of results to return
+     * @param withinDistance search radius from provided point to find results
+     * @return the list
+     */
+    public List<Waterfall> findWaterfallsNear(Coordinates coords, int resultCount, double withinDistance) {
+        return this.findNearest(coords.getLatitude(), coords.getLongitude(), resultCount, withinDistance);
     }
 
     /**
