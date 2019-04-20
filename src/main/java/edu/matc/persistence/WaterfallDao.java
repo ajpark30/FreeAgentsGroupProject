@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WaterfallDao extends GenericDao {
+public class WaterfallDao extends GenericDao<Waterfall> {
 
     private final int DEFAULT_RESULTS_COUNT = 10;
     private final int DEFAULT_WITHIN_DISTANCE = 10000;
@@ -20,6 +20,7 @@ public class WaterfallDao extends GenericDao {
     private Database database = Database.getInstance();
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    // access all methods on GenericDao through this class
     public WaterfallDao() {
         super(Waterfall.class);
     }

@@ -16,8 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 public class PhotoTest {
 
-    private GenericDao<Photo> dao;
-    private GenericDao<Waterfall> waterfallDao;
+    private PhotoDao dao;
+    private WaterfallDao waterfallDao;
+
+//    private GenericDao<Photo> dao;
+//    private GenericDao<Waterfall> waterfallDao;
 
     /**
      * Reset database.
@@ -34,7 +37,7 @@ public class PhotoTest {
      */
     @BeforeEach
     public void setUp() {
-        dao = new GenericDao<>(Photo.class);
+        dao = new PhotoDao();//GenericDao<>(Photo.class);
         DatabaseUtility dbUtil = new DatabaseUtility();
         dbUtil.runSQL("target/test-classes/photoSetup.sql");
     }
@@ -150,7 +153,7 @@ public class PhotoTest {
      * Set up the waterfall dao.
      */
     private void setUpWaterfallDao() {
-        waterfallDao = new GenericDao<>(Waterfall.class);
+        waterfallDao = new WaterfallDao();//new GenericDao<>(Waterfall.class);
     }
 
 }
