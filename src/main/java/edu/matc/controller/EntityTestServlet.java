@@ -50,8 +50,8 @@ public class EntityTestServlet extends HttpServlet {
             }
         }
 */
-        DataParser dataParser = new DataParser();
-        dataParser.openFile();
+//        DataParser dataParser = new DataParser();
+//        dataParser.openFile();
 
         Database database = Database.getInstance();
 
