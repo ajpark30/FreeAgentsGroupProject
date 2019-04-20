@@ -1,5 +1,7 @@
 package edu.matc.controller;
 
+import edu.matc.entity.Waterfall;
+import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 //import edu.matc.persistence.UserDao;
@@ -29,13 +31,13 @@ public class SearchWaterfall extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //WaterfallDao userDao = new WaterfallDao();
+        GenericDao genericDao = new GenericDao(Waterfall.class);
 
         if (req.getParameter("submit").equals("search")) {
-            //req.setAttribute("waterFallInfo", userDao.getWaterFallByZipCOde(req.getParameter("searchTerm")));
+
         }
         if (req.getParameter("submit").equals("viewAll")) {
-            //req.setAttribute("userInfo", userDao.getAllWaterfalls());
+            req.setAttribute("waterFallInfo", genericDao.getAll());
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/waterfallResults.jsp");

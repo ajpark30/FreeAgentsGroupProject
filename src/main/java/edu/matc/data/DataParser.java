@@ -14,9 +14,21 @@ import org.jsoup.select.Selector;
 
 
 public class DataParser {
+    public void parse() throws IOException {
+        //openFile();
+        createLinks();
+        processLinks();
+    }
 
-    public void openFile() {
-        try (BufferedReader links = new BufferedReader(new FileReader("links.txt"))) {
+    private void createLinks() throws IOException {
+        Document docLinks = Jsoup.connect("https://en.wikipedia.org/wiki/List_of_waterfalls").get();
+        Elements links = docLinks.select("a[href^=/wiki/]"); //not specific enough
+        System.out.println(links);
+    }
+
+/*
+    private void openFile() {
+        try (BufferedReader links = new BufferedReader(new FileReader("./links.txt"))) {
             readLinks(links);
         } catch (FileNotFoundException fileNotFound) {
             fileNotFound.printStackTrace();
@@ -38,40 +50,20 @@ public class DataParser {
             urlArray = inputLine.split("\\W");
             for (String urls : urlArray) {
                 if (!urls.isEmpty() && urls.matches(urlReg)) {
-                    processLinks(urls);
+                    processLinks();
                 }
             }
         }
     }
+*/
+    private void processLinks() throws IOException {
+        Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/Blue_Nile_Falls").get();
+        String latLng = doc.body().getElementsByClass("geo-dec").text();
+        String name = doc.body().getElementsByClass("firstHeading").text();
 
-    private void processLinks(String urls) throws IOException {
-        System.out.println(urls);
-        Document doc = Jsoup.connect(urls).get();
-        String latLng = doc.body().getElementsByClass("geo-dec").toString();
-
-
+        System.out.println(latLng);
+        System.out.println(name);
     }
 
-    public static void main(String args[]) throws Exception {
-        /*
-        Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/List_of_waterfalls").get();
-        String DataToParse = "<!DOCTYPE html>"
-                + "<html>"
-                + "<head>"
-                + "<title>Waterfall Sample</title>"
-                + "</head>"
-                + "<body>"
-                + "<table><tr><td><h1>Bridal Falls</h1></tr>"
-                + "</table>"
-                + "<p>Lat Lng</p>"
-                + "</body>"
-                + "</html>";
 
-        Document html = Jsoup.parse(DataToParse);
-        String title = html.title;
-        String name = html.body().getElementsByTag("h1").text();
-        String location = html.body().getElementsByTag("p").text();
-        Elements waterfallLinks = doc.select("a[href^=`/wiki`]");
-        */
-    }
 }

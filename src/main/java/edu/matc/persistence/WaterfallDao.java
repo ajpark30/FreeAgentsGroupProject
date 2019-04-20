@@ -3,15 +3,14 @@ package edu.matc.persistence;
 import edu.matc.entity.Coordinates;
 import edu.matc.entity.Waterfall;
 import edu.matc.util.Database;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class WaterfallDao extends GenericDao {
 

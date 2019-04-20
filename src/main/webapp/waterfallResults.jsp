@@ -6,13 +6,13 @@
 
 <div class="container-fluid">
     <h2>Results for Waterfalls</h2>
-    <c:forEach items="" var="user">
+    <c:forEach items="${waterFallInfo}" var="waterfall">
         <table border = "1" width = "100%">
             <tr>
                 <th>Waterfall Location: </th>
             </tr>
             <tr>
-                <td>Waterfall Name: <br />
+                <td>Waterfall Name: ${waterfall.name}<br />
                     Image: <br />
                 </td>
                 <br />
