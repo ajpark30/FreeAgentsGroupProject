@@ -1,5 +1,6 @@
 package edu.matc.controller;
 
+import edu.matc.data.DataParser;
 import edu.matc.entity.Coordinates;
 import edu.matc.entity.Waterfall;
 import edu.matc.entity.Photo;
@@ -49,6 +50,9 @@ public class EntityTestServlet extends HttpServlet {
             }
         }
 */
+        DataParser dataParser = new DataParser();
+        dataParser.openFile();
+
         Database database = Database.getInstance();
 
         logger.debug("\nWaterfalls closest to 0,0");

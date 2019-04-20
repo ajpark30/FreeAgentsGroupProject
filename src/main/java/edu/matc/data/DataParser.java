@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.*;
 import java.io.IOException;
 import java.util.*;
+
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,7 +15,7 @@ import org.jsoup.select.Selector;
 
 public class DataParser {
 
-    private void openFile() {
+    public void openFile() {
         try (BufferedReader links = new BufferedReader(new FileReader("links.txt"))) {
             readLinks(links);
         } catch (FileNotFoundException fileNotFound) {
@@ -29,7 +31,7 @@ public class DataParser {
         String inputLine = null;
         String[] urlArray = null;
         String urlReg = "\\\\b(https?|ftp|file)://[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|]";
-
+        urlReg = ".*";
 
         while (input.ready()) {
             inputLine = input.readLine();
@@ -43,6 +45,7 @@ public class DataParser {
     }
 
     private void processLinks(String urls) throws IOException {
+        System.out.println(urls);
         Document doc = Jsoup.connect(urls).get();
         String latLng = doc.body().getElementsByClass("geo-dec").toString();
 
