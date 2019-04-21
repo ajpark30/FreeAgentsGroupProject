@@ -59,25 +59,23 @@ public class DataParser {
                 , processedLink.get("header")
                 , processedLink.get("coords"));
 
+        String stringCoords = processedLink.get("coords");
+        String [] coordsArray;
+        String spaceDelimiter = " ";
+        coordsArray = stringCoords.split(spaceDelimiter);
+        coordsArray[0].replaceAll( "[^0-9]", ""); //Not replacing degree and direction like expected.
+        coordsArray[1].replaceAll( "[^0-9]", "");
+        Double latitude = Double.parseDouble(coordsArray[0]);
+        Double longitude = Double.parseDouble(coordsArray[1]);
+
         try {
 
             // create waterfall object and store it here
-            Waterfall waterfall;
-//            try {
-//                Coordinates coordinates = new Coordinates(processedLink.get("coords"));
-//
-//                waterfall = new Waterfall(
-//                        processedLink.get("title")
-//                        , processedLink.get("url")
-//                        , coordinates
-//                    );
-//            } catch (Exception e) { // format exception, no coords, save anyway
-                waterfall = new Waterfall(
-                        processedLink.get("title")
-                        , processedLink.get("url")
-                        , new Coordinates(processedLink.get("latitude"), processedLink.get("longitude"))
-                    );
-//            }
+            Waterfall waterfall = new Waterfall(
+                    processedLink.get("title")
+                    , processedLink.get("url")
+                    , new Coordinates(latitude, longitude)
+            );
             System.out.println("Waterfall:");
             logger.debug(waterfall.toString());
 
@@ -149,12 +147,20 @@ public class DataParser {
         logger.debug("In DataParser.processOneLink()");
         Map<String, String> processedLink = new HashMap<>();
 
+
         Document doc = Jsoup.connect(url).get();
 
         String latLng = doc.body().getElementsByClass("geo-dec").text();
         String name = doc.body().getElementsByClass("firstHeading").text();
-        System.out.println(name);
-
+        /*
+        String stringCoords = latLng;
+        String [] coordsArray;
+        String spaceDelimiter = " ";
+        coordsArray = stringCoords.split(spaceDelimiter);
+        System.out.println(coordsArray);
+        Double latitude = Double.parseDouble(coordsArray[0]);
+        Double longitude = Double.parseDouble(coordsArray[1]);
+        */
 //        logger.debug("latlng: " + latLng);
 //        logger.debug("name: " + name);
 
