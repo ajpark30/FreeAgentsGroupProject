@@ -57,18 +57,21 @@ public class DataParser {
                 , processedLink.get("url")
                 , processedLink.get("title")
                 , processedLink.get("header")
-                , processedLink.get("coords"));
+                , processedLink.get("latitude")
+                , processedLink.get("longitude"));
+//
+//        String stringCoords = processedLink.get("coords");
+//        String [] coordsArray;
+//        String spaceDelimiter = " ";
+//        coordsArray = stringCoords.split(spaceDelimiter);
+//        coordsArray[0].replaceAll( "[^0-9]", ""); //Not replacing degree and direction like expected.
+//        coordsArray[1].replaceAll( "[^0-9]", "");
 
-        String stringCoords = processedLink.get("coords");
-        String [] coordsArray;
-        String spaceDelimiter = " ";
-        coordsArray = stringCoords.split(spaceDelimiter);
-        coordsArray[0].replaceAll( "[^0-9]", ""); //Not replacing degree and direction like expected.
-        coordsArray[1].replaceAll( "[^0-9]", "");
-        Double latitude = Double.parseDouble(coordsArray[0]);
-        Double longitude = Double.parseDouble(coordsArray[1]);
 
         try {
+
+            double latitude = Double.parseDouble(processedLink.get("latitude"));
+            double longitude = Double.parseDouble(processedLink.get("longitude"));
 
             // create waterfall object and store it here
             Waterfall waterfall = new Waterfall(
@@ -106,7 +109,7 @@ public class DataParser {
         System.out.println(links);
         logger.debug(links);
 
-        int maxResults = 100;
+        int maxResults = 100000000;
         for (Element l : links) {
             logger.debug("maxResults: " + maxResults);
             //if (!l.text().matches("all")) { continue; }
@@ -151,6 +154,7 @@ public class DataParser {
         Document doc = Jsoup.connect(url).get();
 
         String latLng = doc.body().getElementsByClass("geo-dec").text();
+        String latLng2 = doc.body().getElementsByClass("geo").text();
         String name = doc.body().getElementsByClass("firstHeading").text();
         /*
         String stringCoords = latLng;
@@ -168,8 +172,28 @@ public class DataParser {
         processedLink.put("title", title);
         processedLink.put("heading", name);
 //        processedLink.put("coords", latLng);
-//        processedLink.put("latitude", Double.parseDouble(latLng.split("\\s")[0]);//latitude);
-//        processedLink.put("longitude", Double.parseDouble(latLng.split("\\s")[1]); //longitude);
+
+        logger.debug("latLng", latLng);
+        logger.debug("latLng2", latLng2);
+        if (latLng.matches("\\-?\\d+\\.\\d+.?[S|N]?\\s.*\\-?\\d+\\.\\d+.?[W|E]?")) {
+
+            String latitudeString = latLng.split("\\s")[0].trim();
+            String latitude = latitudeString.replaceAll("[^ \\d\\.\\-]", "");
+
+            if (latitudeString.contains("S")) {
+                latitude = "-" + latitude;
+            }
+
+            String longitudeString = latLng.split("\\s")[1].trim();
+            String longitude = longitudeString.replaceAll("[^ \\d\\.\\-]", "");
+
+            if (longitudeString.contains("W")) {
+                longitude = "-" + longitude;
+            }
+
+            processedLink.put("latitude", latitude);
+            processedLink.put("longitude", longitude);
+        }
 
         return processedLink;
     }
