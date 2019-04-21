@@ -20,7 +20,7 @@ import java.util.List;
 import edu.matc.util.Database;
 
 /**
- * This servlet routes the HTTP requests of a RESTful client app.
+ * This servlet tests parts of our application with browser output.
  *
  * @author cwmoore
  */
@@ -33,11 +33,12 @@ import edu.matc.util.Database;
 public class EntityTestServlet extends HttpServlet {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
-    private final WaterfallDao w = new WaterfallDao();
+    private final WaterfallDao waterfallDao = new WaterfallDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Waterfall> waterfalls = w.getAll();
+
+        List<Waterfall> waterfalls;// = waterfallDao.getAll();
         PrintWriter out = resp.getWriter();
         /*
         for (Waterfall waterfall : waterfalls) {
@@ -52,18 +53,16 @@ public class EntityTestServlet extends HttpServlet {
         DataParser dataParser = new DataParser();
         dataParser.parseAndRead();
 
-        Database database = Database.getInstance();
-
         //logger.info("\nWaterfalls closest to 0,0");
         out.println("\nWaterfalls closest to 0,0");
-        waterfalls = w.findNearest(0.0, 0.0);
+        waterfalls = waterfallDao.findNearest(0.0, 0.0);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
         }
         //logger.info("\nWaterfalls closest to 0,0");
         out.println("\nWaterfalls closest to 0,0");
-        waterfalls = w.findNearest(0.0, 0.0, 100, 1000);
+        waterfalls = waterfallDao.findNearest(0.0, 0.0, 100, 1000);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -71,7 +70,7 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to 90,90");
         out.println("\nWaterfalls closest to 90,90");
-        waterfalls = w.findNearest(90.0, 90.0);
+        waterfalls = waterfallDao.findNearest(90.0, 90.0);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -79,7 +78,7 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to -90,-90");
         out.println("\nWaterfalls closest to -90,-90");
-        waterfalls = w.findNearest(-90.0, -90.0);
+        waterfalls = waterfallDao.findNearest(-90.0, -90.0);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -87,7 +86,7 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to 45,-120");
         out.println("\nWaterfalls closest to 45,-120");
-        waterfalls = w.findNearest(45.0, -120.0);
+        waterfalls = waterfallDao.findNearest(45.0, -120.0);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -95,7 +94,7 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to 8.7,55.5");
         out.println("\nWaterfalls closest to 8.7,55.5");
-        waterfalls = w.findNearest(8.7, 55.5);
+        waterfalls = waterfallDao.findNearest(8.7, 55.5);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -103,7 +102,7 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to 23.3,85.6");
         out.println("\nWaterfalls closest to 23.3,85.6");
-        waterfalls = w.findNearest(23.3, 85.6);
+        waterfalls = waterfallDao.findNearest(23.3, 85.6);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -111,11 +110,11 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to 53735");
         out.println("\nWaterfalls closest to 53735");
-        Coordinates coords = w.coordsFromZipcode("53735");
+        Coordinates coords = waterfallDao.coordsFromZipcode("53735");
         //logger.info(coords.toString());
         out.println(coords.toString());
 
-        waterfalls = w.findWaterfallsNear(coords);
+        waterfalls = waterfallDao.findWaterfallsNear(coords);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());
@@ -123,11 +122,11 @@ public class EntityTestServlet extends HttpServlet {
 
         //logger.info("\nWaterfalls closest to 90210");
         out.println("\nWaterfalls closest to 90210");
-        coords = w.coordsFromZipcode("90210");
+        coords = waterfallDao.coordsFromZipcode("90210");
         //logger.info(coords.toString());
         out.println(coords.toString());
 
-        waterfalls = w.findWaterfallsNear(coords);
+        waterfalls = waterfallDao.findWaterfallsNear(coords);
         for (Waterfall waterfall : waterfalls) {
             //logger.info(waterfall.toString());
             out.println(waterfall.toString());

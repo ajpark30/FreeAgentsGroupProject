@@ -88,10 +88,10 @@ public class WaterfallDao extends GenericDao<Waterfall> {
                 int row = results.getInt("waterfall_id");
                 waterfalls.add(waterfallDao.getById(row));
 
-                logger.debug("Row: " + row
-                        + "\nDistance: "
-                        + results.getDouble("distance")
-                );
+//                logger.info("Row: " + row
+//                        + "\nDistance: "
+//                        + results.getDouble("distance")
+//                );
             }
         } catch (SQLException se) {
             logger.error(se);

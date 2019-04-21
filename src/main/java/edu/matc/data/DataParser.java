@@ -48,10 +48,12 @@ public class DataParser {
     }
 
     private void handleProcessedLink(Map<String, String> processedLink) {
-        logger.debug(processedLink.get("url"));
-        logger.debug(processedLink.get("title"));
-        logger.debug(processedLink.get("header"));
-        logger.debug(processedLink.get("coords"));
+
+        logger.debug("In DataParser.handleProcessedLink()");
+        logger.debug(new Date().toString(), processedLink.get("url")
+                , processedLink.get("title")
+                , processedLink.get("header")
+                , processedLink.get("coords"));
 
         try {
             // create waterfall object and store it here
@@ -76,27 +78,40 @@ public class DataParser {
      * @throws IOException
      */
     private List<Map<String, String>> createLinkMap(String startUrl) throws IOException {
+        logger.debug("In DataParser.createLinkMap()");
         List<Map<String, String>> linkMapList = new ArrayList<>();
         Map<String, String> linkMap;
         String urlPrefix = "https://en.wikipedia.org";
 
         Document docLinks = Jsoup.connect(startUrl).get();
         Elements links = docLinks.select("a[href^=/wiki/]"); //not specific enough
+        //Elements links = docLinks.select("a[href=/wiki/]"); // trying something else
         System.out.println(links);
         logger.debug(links);
 
         int maxResults = 10;
         for (Element l : links) {
-            if (!l.text().matches("all")) { continue; }
-
+            logger.debug("maxResults: " + maxResults);
             Attributes attr = l.attributes();
+
+            //if (attr.get("href").matches(".*png|jpg|jpeg|gif|bmp.*")) { logger.debug("bad link"); continue; }
             if (attr.get("title") != null) {
-                linkMap = new HashMap<>();
-                linkMap.put("url", urlPrefix + attr.get("href"));
-                linkMap.put("title", attr.get("title"));
-                linkMapList.add(linkMap);
+                logger.debug("Found a title");
+                if (attr.get("title")
+                        .equalsIgnoreCase(l.text()) // more specific:
+
+                        && attr.get("href") // conformant wiki data will be identical
+                                .replaceFirst("/wiki/", "") // in title, text and href (less prefix)
+                                .replace('_', ' ') // (less underscores)
+                            .equalsIgnoreCase(l.text())
+                        ) {
+                    linkMap = new HashMap<>();
+                    linkMap.put("url", urlPrefix + attr.get("href"));
+                    linkMap.put("title", attr.get("title"));
+                    linkMapList.add(linkMap);
+                }
             }
-            
+
             if (maxResults-- <= 0) { break; }
         }
         return linkMapList;
@@ -110,6 +125,7 @@ public class DataParser {
      * @throws IOException
      */
     private Map<String, String> processOneLink(String url, String title) throws IOException {
+        logger.debug("In DataParser.processOneLink()");
         Map<String, String> processedLink = new HashMap<>();
 
         Document doc = Jsoup.connect(url).get();
