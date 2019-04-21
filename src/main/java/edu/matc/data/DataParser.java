@@ -45,20 +45,39 @@ public class DataParser {
         }
     }
 
+    /**
+     * Using a Map of retrieved link data, create and store a Waterfall
+     *
+     * @param processedLink The Map returned from processOneLink(url, title)
+     */
     private void handleProcessedLink(Map<String, String> processedLink) {
+
         logger.debug("In DataParser.handleProcessedLink()");
-        logger.debug(new Date().toString(), processedLink.get("url")
+        logger.debug(new Date().toString()
+                , processedLink.get("url")
                 , processedLink.get("title")
                 , processedLink.get("header")
                 , processedLink.get("coords"));
 
         try {
+
             // create waterfall object and store it here
-            Waterfall waterfall = new Waterfall(
-                    processedLink.get("title")
-                    , processedLink.get("url")
-                    , new Coordinates(processedLink.get("coords"))
-            );
+            Waterfall waterfall;
+//            try {
+//                Coordinates coordinates = new Coordinates(processedLink.get("coords"));
+//
+//                waterfall = new Waterfall(
+//                        processedLink.get("title")
+//                        , processedLink.get("url")
+//                        , coordinates
+//                    );
+//            } catch (Exception e) { // format exception, no coords, save anyway
+                waterfall = new Waterfall(
+                        processedLink.get("title")
+                        , processedLink.get("url")
+                        , new Coordinates(processedLink.get("latitude"), processedLink.get("longitude"))
+                    );
+//            }
             System.out.println("Waterfall:");
             logger.debug(waterfall.toString());
 
@@ -131,6 +150,7 @@ public class DataParser {
         Map<String, String> processedLink = new HashMap<>();
 
         Document doc = Jsoup.connect(url).get();
+
         String latLng = doc.body().getElementsByClass("geo-dec").text();
         String name = doc.body().getElementsByClass("firstHeading").text();
         System.out.println(name);
@@ -141,7 +161,9 @@ public class DataParser {
         processedLink.put("url", url);
         processedLink.put("title", title);
         processedLink.put("heading", name);
-        processedLink.put("coords", latLng);
+//        processedLink.put("coords", latLng);
+//        processedLink.put("latitude", Double.parseDouble(latLng.split("\\s")[0]);//latitude);
+//        processedLink.put("longitude", Double.parseDouble(latLng.split("\\s")[1]); //longitude);
 
         return processedLink;
     }
