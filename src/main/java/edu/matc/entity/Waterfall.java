@@ -31,10 +31,11 @@ public class Waterfall {
     private String state;
     private String region;
 	private String city;
-	private float latitude;
-	private float longitude;
+	private double latitude;
+	private double longitude;
 	private String preserve;
     private String river;
+    private String url;
 
     @OneToMany(mappedBy = "waterfall",
             cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -55,10 +56,39 @@ public class Waterfall {
      * @param latitude  the latitude
      * @param longitude the longitude
      */
-    public Waterfall(String name, float latitude, float longitude) {
+    public Waterfall(String name, double latitude, double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    /**
+     * Instantiates a new Waterfall.
+     *
+     * @param name      the name
+     * @param url      the url
+     * @param latitude  the latitude
+     * @param longitude the longitude
+     */
+    public Waterfall(String name, String url, double latitude, double longitude) {
+        this.name = name;
+        this.url = url;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    /**
+     * Instantiates a new Waterfall.
+     *
+     * @param name      the name
+     * @param url      the url
+     * @param coordinates  the coordinates
+     */
+    public Waterfall(String name, String url, Coordinates coordinates) {
+        this.name = name;
+        this.url = url;
+        this.latitude = coordinates.getLatitude();
+        this.longitude = coordinates.getLongitude();
     }
 
     /**
@@ -75,7 +105,7 @@ public class Waterfall {
      * @param preserve     the preserve
      * @param river        the river
      */
-    public Waterfall(int waterfall_id, String name, String country, String state, String region, String city, float latitude, float longitude, String preserve, String river) {
+    public Waterfall(int waterfall_id, String name, String country, String state, String region, String city, double latitude, double longitude, String preserve, String river) {
         this.waterfall_id = waterfall_id;
         this.name = name;
         this.country = country;
@@ -219,7 +249,7 @@ public class Waterfall {
      *
      * @return the latitude
      */
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -228,7 +258,7 @@ public class Waterfall {
      *
      * @param latitude the latitude
      */
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -237,7 +267,7 @@ public class Waterfall {
      *
      * @return the longitude
      */
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -246,7 +276,7 @@ public class Waterfall {
      *
      * @param longitude the longitude
      */
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -287,6 +317,24 @@ public class Waterfall {
     }
 
     /**
+     * Gets url.
+     *
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets url.
+     *
+     * @param url the url
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
      * Gets photos.
      *
      * @return the photos
@@ -316,9 +364,10 @@ public class Waterfall {
         if (!super.equals(object)) return false;
         Waterfall waterfall = (Waterfall) object;
         return waterfall_id == waterfall.waterfall_id &&
-                Float.compare(waterfall.latitude, latitude) == 0 &&
-                Float.compare(waterfall.longitude, longitude) == 0 &&
+                Double.compare(waterfall.latitude, latitude) == 0 &&
+                Double.compare(waterfall.longitude, longitude) == 0 &&
                 name.equals(waterfall.name) &&
+                url.equals(waterfall.url) &&
                 country.equals(waterfall.country) &&
                 java.util.Objects.equals(state, waterfall.state) &&
                 java.util.Objects.equals(region, waterfall.region) &&

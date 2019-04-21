@@ -1,4 +1,3 @@
-USE waterfalls;
 -- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
 --
 -- Host: localhost    Database: waterfalls
@@ -73,6 +72,7 @@ CREATE TABLE `waterfall` (
   `longitude` float NOT NULL,
   `preserve` varchar(100) DEFAULT NULL,
   `river` varchar(100) DEFAULT NULL,
+  `url` varchar(333) DEFAULT NULL,
   PRIMARY KEY (`waterfall_id`),
   KEY `watlondex` (`longitude`),
   KEY `watlatdex` (`latitude`),
@@ -86,7 +86,7 @@ CREATE TABLE `waterfall` (
 
 LOCK TABLES `waterfall` WRITE;
 /*!40000 ALTER TABLE `waterfall` DISABLE KEYS */;
-INSERT INTO `waterfall` VALUES (1,'Kalandula Falls',NULL,NULL,NULL,NULL,NULL,NULL,-9.07583,16.0033,NULL,NULL),(2,'Sedudo Waterfall',NULL,NULL,NULL,NULL,NULL,NULL,-7.78022,111.758,NULL,NULL),(3,'Grandfather Falls',NULL,NULL,NULL,NULL,NULL,NULL,45.3131,-89.7847,NULL,NULL);
+INSERT INTO `waterfall` VALUES (1,'Kalandula Falls',NULL,NULL,NULL,NULL,NULL,NULL,-9.07583,16.0033,NULL,NULL,NULL),(2,'Sedudo Waterfall',NULL,NULL,NULL,NULL,NULL,NULL,-7.78022,111.758,NULL,NULL,NULL),(3,'Grandfather Falls',NULL,NULL,NULL,NULL,NULL,NULL,45.3131,-89.7847,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `waterfall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-16 10:34:50
+-- Dump completed on 2019-04-20 19:06:36

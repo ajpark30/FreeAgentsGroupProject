@@ -1,5 +1,9 @@
 package edu.matc.entity;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.TypeMismatchException;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,6 +17,8 @@ public class Coordinates {
 
     double latitude;
     double longitude;
+
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
      * Instantiates a new Coordinates.
@@ -29,6 +35,92 @@ public class Coordinates {
     public Coordinates(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+
+    /**
+     * Instantiates a new Coordinates.
+     *
+     * @param coords the coordinates as a string
+     */
+    public Coordinates(String coords) throws Exception {
+        // "5.96750°N 62.53556°W"
+        if (coords.matches("\\d+\\.\\d+.\\w\\s+\\d+\\.\\d+.\\w")) {
+            this.latitude = getLatitudeFromString(coords);
+            this.longitude = getLongitudeFromString(coords);
+        } else {
+            throw new TypeMismatchException("Tried to create new Coordinates from unrecognized String format.");
+        }
+    }
+
+    /**
+     * Gets latitude from string coords
+     *
+     * @return the latitude
+     */
+    public double getLatitudeFromString(String coords) {
+        return getLatLonFromString(coords)[0];
+    }
+
+    /**
+     * Gets latitude from string coords
+     *
+     * @return the latitude
+     */
+    public double getLongitudeFromString(String coords) {
+        return getLatLonFromString(coords)[1];
+    }
+
+    /**
+     * Get latitude and longitude from string coords
+     * @param coords
+     * @return
+     */
+    public double[] getLatLonFromString(String coords) {
+        //"5.96750°N 62.53556°W"
+        double[] latLon = new double[2];
+        String[] parts = coords.split("\\s+");
+        latLon[0] = getLatFromString(parts[0]);
+        latLon[1] = getLonFromString(parts[1]);
+        return latLon;
+    }
+
+    /**
+     * Get decimal latitude from string
+     * @param latitude the latitude
+     * @return latitude as a double
+     */
+    private double getLatFromString(String latitude) {
+        //"5.96750°N"
+        logger.debug("latitude", latitude);
+        double lat = Double.parseDouble(latitude.trim());
+
+        if (latitude.substring(-1) == "S") {
+            lat = -lat;
+        } else if (latitude.substring(-1) == "N") {
+            // stays positive
+        }
+
+        return lat;
+    }
+
+    /**
+     * Get decimal longitude from string
+     * @param longitude the longitude
+     * @return longitude as a double
+     */
+    private double getLonFromString(String longitude) {
+        //"62.53556°W"
+        logger.debug("longitude", longitude);
+        double lon = Double.parseDouble(longitude.trim());
+
+        if (longitude.substring(-1) == "E") {
+            lon = -lon;
+        } else if (longitude.substring(-1) == "W") {
+            // stays positive
+        }
+
+        return lon;
     }
 
     /**
