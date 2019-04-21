@@ -81,7 +81,7 @@ public class DataParser {
         String urlPrefix = "https://en.wikipedia.org";
 
         Document docLinks = Jsoup.connect(startUrl).get();
-        Elements links = docLinks.select("a[href^=/wiki/]"); //not specific enough
+        Elements links = docLinks.select("a[title*=falls]").not("a[href^=/wiki/List], a[href^=/wiki/Portal], a[href^=https], a[href^=/wiki/Category]");
         System.out.println(links);
         logger.debug(links);
 
@@ -130,40 +130,10 @@ public class DataParser {
 
     private void createLinks() throws IOException {
         Document docLinks = Jsoup.connect("https://en.wikipedia.org/wiki/List_of_waterfalls").get();
-        Elements links = docLinks.select("a[href^=/wiki/]"); //not specific enough
+        Elements links = docLinks.select("a[title*=falls]").not("a[href^=/wiki/List], a[href^=/wiki/Portal], a[href^=https], a[href^=/wiki/Category]");
         System.out.println(links);
     }
 
-    /*
-        private void openFile() {
-            try (BufferedReader links = new BufferedReader(new FileReader("./links.txt"))) {
-                readLinks(links);
-            } catch (FileNotFoundException fileNotFound) {
-                fileNotFound.printStackTrace();
-            } catch (IOException inputOutputException) {
-                inputOutputException.printStackTrace();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-
-        private void readLinks(BufferedReader input) throws IOException {
-            String inputLine = null;
-            String[] urlArray = null;
-            String urlReg = "\\\\b(https?|ftp|file)://[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|]";
-            urlReg = ".*";
-
-            while (input.ready()) {
-                inputLine = input.readLine();
-                urlArray = inputLine.split("\\W");
-                for (String urls : urlArray) {
-                    if (!urls.isEmpty() && urls.matches(urlReg)) {
-                        processLinks();
-                    }
-                }
-            }
-        }
-    */
     private void processLinks() throws IOException {
         Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/Blue_Nile_Falls").get();
         String latLng = doc.body().getElementsByClass("geo-dec").text();
