@@ -9,11 +9,15 @@
     <c:forEach items="${waterFallInfo}" var="waterfall">
         <table border = "1" width = "100%">
             <tr>
-                <th>Waterfall Location: </th>
+                <th>Waterfall Information: </th>
             </tr>
             <tr>
                 <td>Waterfall Name: ${waterfall.name}<br />
-                    Image: <br />
+                    city: ${waterfall.city} <c:if test="${empty waterfall.city}">N/A</c:if><br />
+                    state: ${waterfall.state} <c:if test="${empty waterfall.state}">N/A</c:if> <br />
+                    Latitude: ${waterfall.latitude}<c:if test="${empty waterfall.latitude}">N/A</c:if><br />
+                    Longitude: ${waterfall.longitude}<c:if test="${empty waterfall.longitude}">N/A</c:if><br />
+                    URL: ${waterfall.url}<c:if test="${empty waterfall.url}">N/A</c:if><br />
                 </td>
                 <br />
             </tr>

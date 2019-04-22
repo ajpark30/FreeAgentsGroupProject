@@ -15,6 +15,7 @@
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="searchZip" name="searchZip" aria-describedby="searchTermHelp" required/>
                         </div>
+                        <br />
                         <div class="form-group">
                         <div class="col-sm-offset-6 col-sm-6">
                             <button type="submit" name="submit" value="searchByZip" class="btn btn-primary">Search</button>
@@ -36,6 +37,7 @@
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="searchName" name="searchName" aria-describedby="searchTermHelp" required/>
                         </div>
+                        <br />
                         <div class="form-group">
                         <div class="col-sm-offset-6 col-sm-6">
                             <button type="submit" name="submit" value="searchByName" class="btn btn-primary">Search</button>
@@ -60,6 +62,7 @@
                         <label class="control-label col-sm-5" for="searchLongitude">Enter Longitude</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="searchLongitude" name="searchLongitude" aria-describedby="searchTermHelp" required/>
+                        <br />
                         </div>
                         <div class="form-group">
                         <div class="col-sm-offset-6 col-sm-6">
