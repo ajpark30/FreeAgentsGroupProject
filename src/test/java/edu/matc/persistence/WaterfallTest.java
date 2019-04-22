@@ -99,7 +99,7 @@ public class WaterfallTest {
     @Test
     public void testGetAll() {
         List<Waterfall> waterfalls = dao.getAll();
-        assertEquals(4, waterfalls.size());
+        assertEquals(6, waterfalls.size());
     }
 
     /**
@@ -138,6 +138,23 @@ public class WaterfallTest {
     }
 
     /**
+     * Test findNearest.
+     */
+    @Test
+    public void testFindNearest() {
+        List<Waterfall> source = getNearWaterfalls();
+
+        List<Waterfall> results = dao.findNearest(
+            source.get(0).getLatitude()
+            , source.get(0).getLongitude()
+            , 10
+            , 5000
+        );
+
+        assertEquals(1, results.size());
+    }
+
+    /**
      * Set up photoDao and photo table.
      */
     private void setUpDeleteTest() {
@@ -157,4 +174,14 @@ public class WaterfallTest {
         return mockWaterfall;
     }
 
+    /**
+     * Get two waterfalls within 300 miles of each other.
+     * @return
+     */
+    private List<Waterfall> getNearWaterfalls() {
+        return new ArrayList<Waterfall>(Arrays.asList(
+            dao.getById(1)
+            , dao.getById(6)
+        ));
+    }
 }
