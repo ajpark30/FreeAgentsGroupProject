@@ -16,43 +16,52 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/get")
+@Path("/doGet")
 public class GetWaterfalls {
 
     private final WaterfallDao waterfallDao = new WaterfallDao();
-    private final GenericDao<Waterfall> waterfallGenericDao = new GenericDao(Waterfall.class);
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Waterfall> getAllWaterfallInformation() {
-
-        List<Waterfall> waterfalls = waterfallGenericDao.getAll();
-
+        List<Waterfall> waterfalls = waterfallDao.getAll();
         return waterfalls;
-
     }
 
 
     @GET
-    @Path("/byZipcode/{param}")
+    @Path("/zipcode/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Waterfall> getWaterfallsByZipcode(@PathParam("param") String location) {
-
         Coordinates waterfallCoordinates = waterfallDao.coordsFromZipcode(location);
         List<Waterfall> waterfallListByZipcode = waterfallDao.findWaterfallsNear(waterfallCoordinates);
-
         return waterfallListByZipcode;
     }
 
     @GET
-    @Path("byName/{param}/{param2}")
+    @Path("name/{param}/{param2}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Waterfall> getWaterfallsByName(@PathParam("param") String searchTerm, @PathParam("param2") String name) {
-
-        List<Waterfall> waterfallListByName = waterfallGenericDao.getByPropertyEqual(searchTerm, name);
-
+        List<Waterfall> waterfallListByName = waterfallDao.getByPropertyEqual(searchTerm, name);
         return waterfallListByName;
     }
+
+    @GET
+    @Path("latitude/{param}/longitude/{param2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Waterfall> getWaterfallsByLatLong(@PathParam("param") Double latitude, @PathParam("param2") Double longitude){
+        List<Waterfall> waterfallListByLatLong = waterfallDao.findNearest(latitude, longitude);
+        return waterfallListByLatLong;
+    }
+
+    @GET
+    @Path("location/{param}/{param2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Waterfall> getWaterfallsByLocation(@PathParam("param") String searchTerm, @PathParam("param2") String location) {
+        List<Waterfall> waterfallListByLocation = waterfallDao.getByPropertyEqual(searchTerm, location);
+        return waterfallListByLocation;
+    }
+
 
 }
 
