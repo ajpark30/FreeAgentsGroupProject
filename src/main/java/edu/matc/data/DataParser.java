@@ -83,11 +83,15 @@ public class DataParser {
                     waterfall
                     , processedLink.get("imageURL")
                     , processedLink.get("title")
-                    , processedLink.get("imageURL")
+                    , processedLink.get("url")
             );
+
+            waterfallDao.saveOrUpdate(waterfall);
+            photoDao.saveOrUpdate(photo);
+
             logger.debug(photo.toString());
             logger.debug(waterfall.toString());
-            waterfallDao.saveOrUpdate(waterfall);
+
         } catch (Exception e) {
             logger.debug(e.toString());
         }
