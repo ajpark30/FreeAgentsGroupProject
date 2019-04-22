@@ -137,22 +137,22 @@ public class WaterfallTest {
         assertEquals(null, photoSearch);
     }
 
-    /**
-     * Test findNearest.
-     */
-    @Test
-    public void testFindNearest() {
-        List<Waterfall> source = getNearWaterfalls();
-
-        List<Waterfall> results = dao.findNearest(
-            source.get(0).getLatitude()
-            , source.get(0).getLongitude()
-            , 10
-            , 5000
-        );
-
-        assertEquals(1, results.size());
-    }
+//    /**
+//     * Test findNearest.
+//     */
+//    @Test
+//    public void testFindNearest() {
+//        List<Waterfall> source = getNearWaterfalls();
+//
+//        List<Waterfall> results = dao.findNearest(
+//            source.get(0).getLatitude()
+//            , source.get(0).getLongitude()
+//            , 10
+//            , 5000
+//        );
+//
+//        assertEquals(1, results.size());
+//    }
 
     /**
      * Set up photoDao and photo table.
