@@ -12,6 +12,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * WaterFall Data Access Object
+ *
+ * @author cwmoore
+ */
 public class WaterfallDao extends GenericDao<Waterfall> {
 
     private final int DEFAULT_RESULTS_COUNT = 10;
@@ -24,6 +29,9 @@ public class WaterfallDao extends GenericDao<Waterfall> {
     public WaterfallDao() {
         super(Waterfall.class);
     }
+
+    // remove duplicates if wanted with:
+    // DELETE t1 FROM waterfall t1 INNER JOIN waterfall t2 WHERE t1.waterfall_id < t2.waterfall_id AND t1.name=t2.name;
 
     /**
      * Find nearest waterfalls to lat/lon.
