@@ -3,7 +3,6 @@ package edu.matc.persistence;
 import edu.matc.entity.Photo;
 import edu.matc.entity.Waterfall;
 import edu.matc.util.DatabaseUtility;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,17 +22,13 @@ public class WaterfallTest {
     private WaterfallDao dao;
     private PhotoDao photoDao;
 
-//    private GenericDao<Waterfall> dao;
-//    private GenericDao<Photo> photoDao;
-
     /**
      * Reset database.
      */
     @BeforeAll
-    @AfterAll
-    public static void resetDatabase() {
+    public static void setUpAll() {
         DatabaseUtility dbUtil = new DatabaseUtility();
-        dbUtil.runSQL("target/test-classes/create_waterfalls_db.sql");
+        dbUtil.runSQL("target/test-classes/sql/create_waterfalls_db.sql");
     }
 
     /**
@@ -41,9 +36,9 @@ public class WaterfallTest {
      */
     @BeforeEach
     public void setUpEach() {
-        dao = new WaterfallDao();//new GenericDao<>(Waterfall.class);
+        dao = new WaterfallDao();
         DatabaseUtility dbUtil = new DatabaseUtility();
-        dbUtil.runSQL("target/test-classes/waterfallSetup.sql");
+        dbUtil.runSQL("target/test-classes/sql/waterfallSetup.sql");
     }
 
     /**
@@ -88,14 +83,14 @@ public class WaterfallTest {
     @Test
     public void testUpdate() {
         Waterfall waterfall = dao.getById(1);
-        waterfall.setLongitude(333.33f);
+        waterfall.setLongitude(333.33);
 
         dao.saveOrUpdate(waterfall);
 
         Waterfall foundWaterfall = dao.getById(1);
 
         assertNotEquals(null, foundWaterfall);
-        assertEquals(333.33f, foundWaterfall.getLongitude());
+        assertEquals(333.33, foundWaterfall.getLongitude());
     }
 
     /**
@@ -104,7 +99,7 @@ public class WaterfallTest {
     @Test
     public void testGetAll() {
         List<Waterfall> waterfalls = dao.getAll();
-        assertEquals(4, waterfalls.size());
+        assertEquals(6, waterfalls.size());
     }
 
     /**
@@ -112,7 +107,7 @@ public class WaterfallTest {
      */
     @Test
     public void testInsert() {
-        Waterfall waterfallToAdd = new Waterfall("Foo Falls", -10.002f, 34.394f);
+        Waterfall waterfallToAdd = new Waterfall("Foo Falls", -10.002, 34.394);
         Photo p = new Photo();
         p.setWaterfall(waterfallToAdd);
         waterfallToAdd.setPhotos(new ArrayList<>(Arrays.asList(p)));
@@ -142,13 +137,30 @@ public class WaterfallTest {
         assertEquals(null, photoSearch);
     }
 
+//    /**
+//     * Test findNearest.
+//     */
+//    @Test
+//    public void testFindNearest() {
+//        List<Waterfall> source = getNearWaterfalls();
+//
+//        List<Waterfall> results = dao.findNearest(
+//            source.get(0).getLatitude()
+//            , source.get(0).getLongitude()
+//            , 10
+//            , 5000
+//        );
+//
+//        assertEquals(1, results.size());
+//    }
+
     /**
      * Set up photoDao and photo table.
      */
     private void setUpDeleteTest() {
         DatabaseUtility dbUtil = new DatabaseUtility();
-        dbUtil.runSQL("target/test-classes/photoSetup.sql");
-        photoDao = new PhotoDao();//new GenericDao<>(Photo.class);
+        dbUtil.runSQL("target/test-classes/sql/photoSetup.sql");
+        photoDao = new PhotoDao();
     }
 
     /**
@@ -157,9 +169,19 @@ public class WaterfallTest {
      * @return the waterfall
      */
     private Waterfall getMockWaterfall() {
-        Waterfall mockWaterfall = new Waterfall("Kalandula Falls", -9.07583f, 16.0033f);
+        Waterfall mockWaterfall = new Waterfall("Kalandula Falls", -9.07583, 16.0033);
         mockWaterfall.setWaterfallId(1);
         return mockWaterfall;
     }
 
+    /**
+     * Get two waterfalls within 300 miles of each other.
+     * @return
+     */
+    private List<Waterfall> getNearWaterfalls() {
+        return new ArrayList<Waterfall>(Arrays.asList(
+            dao.getById(1)
+            , dao.getById(6)
+        ));
+    }
 }

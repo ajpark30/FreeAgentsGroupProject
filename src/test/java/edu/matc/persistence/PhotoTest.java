@@ -1,7 +1,6 @@
 package edu.matc.persistence;
 
 import edu.matc.entity.Photo;
-import edu.matc.entity.Waterfall;
 import edu.matc.util.DatabaseUtility;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,28 +17,25 @@ public class PhotoTest {
 
     private PhotoDao dao;
     private WaterfallDao waterfallDao;
-
-//    private GenericDao<Photo> dao;
-//    private GenericDao<Waterfall> waterfallDao;
+    private static final DatabaseUtility dbUtilStatic = new DatabaseUtility();
 
     /**
      * Reset database.
      */
     @BeforeAll
-    @AfterAll
-    public static void resetDatabase() {
-        DatabaseUtility dbUtil = new DatabaseUtility();
-        dbUtil.runSQL("target/test-classes/create_waterfalls_db.sql");
+    public static void setUpAll() {
+        dbUtilStatic.runSQL("target/test-classes/sql/create_waterfalls_db.sql");
+        dbUtilStatic.runSQL("target/test-classes/sql/waterfallSetup.sql");
     }
 
     /**
      * Set up each test.
      */
     @BeforeEach
-    public void setUp() {
-        dao = new PhotoDao();//GenericDao<>(Photo.class);
+    public void setUpEach() {
+        dao = new PhotoDao();
         DatabaseUtility dbUtil = new DatabaseUtility();
-        dbUtil.runSQL("target/test-classes/photoSetup.sql");
+        dbUtil.runSQL("target/test-classes/sql/photoSetup.sql");
     }
 
     /**
@@ -153,7 +149,7 @@ public class PhotoTest {
      * Set up the waterfall dao.
      */
     private void setUpWaterfallDao() {
-        waterfallDao = new WaterfallDao();//new GenericDao<>(Waterfall.class);
+        waterfallDao = new WaterfallDao();
     }
 
 }

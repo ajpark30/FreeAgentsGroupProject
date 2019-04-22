@@ -28,7 +28,7 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name="photo_id")
-    private int photo_id;
+    private String photo_id;
 
     @XmlTransient
     @JsonIgnore
@@ -65,7 +65,7 @@ public class Photo {
      * @param title        the title
      * @param localPath    the local path
      */
-    public Photo(int photo_id, Waterfall waterfall, String sourceURL, String title, String localPath) {
+    public Photo(String photo_id, Waterfall waterfall, String sourceURL, String title, String localPath) {
         this.photo_id = photo_id;
         this.waterfall = waterfall;
         this.sourceURL = sourceURL;
@@ -78,7 +78,7 @@ public class Photo {
      *
      * @return the photo_id
      */
-    public int getPhotoId() {
+    public String getPhotoId() {
         return photo_id;
     }
 
@@ -87,7 +87,7 @@ public class Photo {
      *
      * @param photo_id the photo_id
      */
-    public void setPhotoId(int photo_id) {
+    public void setPhotoId(String photo_id) {
         this.photo_id = photo_id;
     }
 
