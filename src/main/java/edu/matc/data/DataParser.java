@@ -54,7 +54,7 @@ public class DataParser {
      * @param processedLink The Map returned from processOneLink(url, title)
      */
     private void handleProcessedLink(Map<String, String> processedLink) {
-
+        /*
         logger.debug("In DataParser.handleProcessedLink()");
         logger.debug(new Date().toString()
                 , processedLink.get("url")
@@ -63,7 +63,7 @@ public class DataParser {
                 , processedLink.get("latitude")
                 , processedLink.get("longitude")
                 , processedLink.get("imageURL"));
-
+        */
         try {
 
             double latitude = Double.parseDouble(processedLink.get("latitude"));
@@ -76,9 +76,9 @@ public class DataParser {
                     , new Coordinates(latitude, longitude)
             );
 
-            int photoID = 0;
+            String uniqueID = UUID.randomUUID().toString();
             Photo photo = new Photo(
-                    photoID
+                    uniqueID
                     , waterfall
                     , processedLink.get("imageURL")
                     , processedLink.get("title")
@@ -113,14 +113,14 @@ public class DataParser {
 
         int maxResults = 100000000;
         for (Element l : links) {
-            logger.debug("maxResults: " + maxResults);
+            //logger.debug("maxResults: " + maxResults);
             //if (!l.text().matches("all")) { continue; }
 
             Attributes attr = l.attributes();
 
             //if (attr.get("href").matches(".*png|jpg|jpeg|gif|bmp.*")) { logger.debug("bad link"); continue; }
             if (attr.get("title") != null) {
-                logger.debug("Found a title");
+                //logger.debug("Found a title");
                 if (attr.get("title")
                         .equalsIgnoreCase(l.text()) // more specific:
 
