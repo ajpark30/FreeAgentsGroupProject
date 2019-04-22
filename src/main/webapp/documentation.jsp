@@ -42,6 +42,21 @@
         <code>http://localhost:8080/waterfalls/{coordinates here}</code>
     </div>
 </div>
-
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>Searching by Like Name</h2>
+    <br />
+    <div class="well">
+        <p>Searches for best fit based on what was entered.</p>
+        <code>http://localhost:8080/waterfalls/exactName{name here}</code>
+    </div>
+</div>
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>Searching by Exact Name</h2>
+    <br />
+    <div class="well">
+        <p>This will only return if the name is exactly as it appears in the database</p>
+        <code>http://localhost:8080/waterfalls/exactName{name here}</code>
+    </div>
+</div>
 </body>
 </html>

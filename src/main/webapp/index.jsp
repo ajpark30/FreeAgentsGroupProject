@@ -36,7 +36,16 @@
     <br />
     <div class="row">
         <div class="well" id="userWell">
-            <p>Use this base URL :</p><input id="byName" value="http://18.221.180.234:8080/waterfallRest/name/Little%20River%20Falls" /><button onclick="copyToClipByName()">Copy</button>
+            <p>Use this base URL :</p><input id="byName" value="http://18.221.180.234:8080/waterfallRest/likeName/Little%20River%20Falls" /><button onclick="copyToClipByName()">Copy</button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>WaterFall by Exact Name</h2>
+    <br />
+    <div class="row">
+        <div class="well" id="userWell">
+            <p>Use this base URL :</p><input id="byName" value="http://18.221.180.234:8080/waterfallRest/exactName/Little%20River%20Falls" /><button onclick="copyToClipByName()">Copy</button>
         </div>
     </div>
 </div>
