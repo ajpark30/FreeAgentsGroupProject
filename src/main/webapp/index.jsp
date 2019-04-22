@@ -10,7 +10,8 @@
         <br />
         <div class="well">
             <h2>Requesting our waterfall information</h2>
-            <p>Use this base URL : http://localhost:8080/waterfalls/</p>
+            <p>Use this base URL : http://localhost:8080/waterfalls/ - this doesn't seem to work<br>
+                <a href="http://localhost:8080/waterfalls/">http://localhost:8080/waterfalls/</a></p>
         </div>
     </div>
     <div class="container col-md-8 col-md-offset-2">
@@ -18,7 +19,8 @@
         <br />
         <div class="row">
             <div class="well" id="userWell">
-                <p>URL : http://localhost:8080/waterfalls/zipcode/{Enter your zipcode here}</p>
+                <p>URL : http://localhost:8080/waterfalls/zipcode/{Enter your zipcode here}<br />
+                    <a href="http://localhost:8080/waterfalls/zipcode/53705">http://localhost:8080/waterfalls/zipcode/53705</a></p>
             </div>
         </div>
     </div>
@@ -27,7 +29,8 @@
         <br />
         <div class="row">
             <div class="well" id="userWell">
-                <p>URL : http://localhost:8080/waterfalls/name/{Enter name of waterfall here}</p>
+                <p>URL : http://localhost:8080/waterfalls/name/{Enter name of waterfall here} -- this doesn't seem to work<br />
+                    <a href="http://localhost:8080/waterfalls/name/Little%20River%20Falls">http://localhost:8080/waterfalls/name/Little%20River%20Falls</a></p>
             </div>
         </div>
     </div>
@@ -36,7 +39,8 @@
         <br />
         <div class="row">
             <div class="well" id="userWell">
-               <p>URL : http://localhost:8080/waterfalls/latitude/{Enter latitude}/longitude/{Enter longitude}</p>
+               <p>URL : http://localhost:8080/waterfalls/latitude/{Enter latitude}/longitude/{Enter longitude} <br/>
+                   <a href="http://localhost:8080/waterfalls/latitude/-40.0/longitude/100.00011">http://localhost:8080/waterfalls/latitude/-40.0/longitude/100.00011</a></p>
             </div>
         </div>
     </div>
@@ -44,7 +48,8 @@
         <h2>All Waterfalls</h2>
         <div class="row">
             <div class="well" id="userWell">
-                <p>URL : http://localhost:8080/waterfalls/all</p>
+                <p>URL : http://localhost:8080/waterfalls/all<br>
+                    <a href="http://localhost:8080/waterfalls/all">http://localhost:8080/waterfalls/all</a></p>
             </div>
         </div>
     </div>

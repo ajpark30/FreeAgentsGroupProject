@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/doGet")
+@Path("/")
 public class GetWaterfalls {
 
     private final WaterfallDao waterfallDao = new WaterfallDao();
