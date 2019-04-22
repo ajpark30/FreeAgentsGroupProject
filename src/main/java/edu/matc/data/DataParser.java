@@ -8,7 +8,9 @@ import java.util.*;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import edu.matc.entity.Coordinates;
 import edu.matc.entity.Waterfall;
+import edu.matc.entity.Photo;
 import edu.matc.persistence.WaterfallDao;
+import edu.matc.persistence.PhotoDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -23,6 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class DataParser {
     Logger logger = LogManager.getLogger(this.getClass());
     WaterfallDao waterfallDao = new WaterfallDao();
+    PhotoDao photoDao = new PhotoDao();
 
     public void parse() throws IOException {
         parseAndRead();
@@ -58,15 +61,8 @@ public class DataParser {
                 , processedLink.get("title")
                 , processedLink.get("header")
                 , processedLink.get("latitude")
-                , processedLink.get("longitude"));
-//
-//        String stringCoords = processedLink.get("coords");
-//        String [] coordsArray;
-//        String spaceDelimiter = " ";
-//        coordsArray = stringCoords.split(spaceDelimiter);
-//        coordsArray[0].replaceAll( "[^0-9]", ""); //Not replacing degree and direction like expected.
-//        coordsArray[1].replaceAll( "[^0-9]", "");
-
+                , processedLink.get("longitude")
+                , processedLink.get("imageURL"));
 
         try {
 
@@ -79,9 +75,17 @@ public class DataParser {
                     , processedLink.get("url")
                     , new Coordinates(latitude, longitude)
             );
-            System.out.println("Waterfall:");
-            logger.debug(waterfall.toString());
 
+            int photoID = 0;
+            Photo photo = new Photo(
+                    photoID
+                    , waterfall
+                    , processedLink.get("imageURL")
+                    , processedLink.get("title")
+                    , processedLink.get("imageURL")
+            );
+            logger.debug(photo.toString());
+            logger.debug(waterfall.toString());
             waterfallDao.saveOrUpdate(waterfall);
         } catch (Exception e) {
             logger.debug(e.toString());
@@ -102,8 +106,6 @@ public class DataParser {
 
         Document docLinks = Jsoup.connect(startUrl).get();
 
-        //Elements links = docLinks.select("a[href^=/wiki/]"); //not specific enough
-        //Elements links = docLinks.select("a[href=/wiki/]"); // trying something else
         Elements links = docLinks.select("a[title*=falls]").not("a[href^=/wiki/List], a[href^=/wiki/Portal], a[href^=https], a[href^=/wiki/Category]");
 
         System.out.println(links);
@@ -156,21 +158,19 @@ public class DataParser {
         String latLng = doc.body().getElementsByClass("geo-dec").text();
         String latLng2 = doc.body().getElementsByClass("geo").text();
         String name = doc.body().getElementsByClass("firstHeading").text();
-        /*
-        String stringCoords = latLng;
-        String [] coordsArray;
-        String spaceDelimiter = " ";
-        coordsArray = stringCoords.split(spaceDelimiter);
-        System.out.println(coordsArray);
-        Double latitude = Double.parseDouble(coordsArray[0]);
-        Double longitude = Double.parseDouble(coordsArray[1]);
-        */
+        Elements thumbImage = doc.body().getElementsByClass("thumbimage");
+        String thumbURL = thumbImage.attr("src");
+        String imageURL = "https:" + thumbURL;
+        //System.out.println(imageURL);
+
 //        logger.debug("latlng: " + latLng);
 //        logger.debug("name: " + name);
 
         processedLink.put("url", url);
         processedLink.put("title", title);
         processedLink.put("heading", name);
+        processedLink.put("imageURL", imageURL);
+
 //        processedLink.put("coords", latLng);
 
         logger.debug("latLng", latLng);
@@ -197,22 +197,4 @@ public class DataParser {
 
         return processedLink;
     }
-
-/*
-    private void createLinks() throws IOException {
-        Document docLinks = Jsoup.connect("https://en.wikipedia.org/wiki/List_of_waterfalls").get();
-        Elements links = docLinks.select("a[title*=falls]").not("a[href^=/wiki/List], a[href^=/wiki/Portal], a[href^=https], a[href^=/wiki/Category]");
-        System.out.println(links);
-    }
-
-    private void processLinks() throws IOException {
-        Document doc = Jsoup.connect("https://en.wikipedia.org/wiki/Blue_Nile_Falls").get();
-        String latLng = doc.body().getElementsByClass("geo-dec").text();
-        String name = doc.body().getElementsByClass("firstHeading").text();
-
-        System.out.println(latLng);
-        System.out.println(name);
-
-    }
-*/
 }
