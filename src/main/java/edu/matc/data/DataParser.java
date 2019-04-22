@@ -76,10 +76,11 @@ public class DataParser {
                     , new Coordinates(latitude, longitude)
             );
 
-            String uniqueID = UUID.randomUUID().toString();
+            //String uniqueID = UUID.randomUUID().toString();
             Photo photo = new Photo(
-                    uniqueID
-                    , waterfall
+//                    uniqueID
+//                    ,
+                    waterfall
                     , processedLink.get("imageURL")
                     , processedLink.get("title")
                     , processedLink.get("imageURL")

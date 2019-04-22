@@ -12,6 +12,7 @@
             <h2>Requesting our waterfall information</h2>
             <p>Use this base URL : http://localhost:8080/waterfalls/ - this doesn't seem to work<br>
                 <a href="http://localhost:8080/waterfalls/">http://localhost:8080/waterfalls/</a></p>
+            <p>Use this base URL : http://18.221.180.234:8080/waterfallRest/</p>
         </div>
     </div>
     <div class="container col-md-8 col-md-offset-2">
@@ -21,6 +22,7 @@
             <div class="well" id="userWell">
                 <p>URL : http://localhost:8080/waterfalls/zipcode/{Enter your zipcode here}<br />
                     <a href="http://localhost:8080/waterfalls/zipcode/53705">http://localhost:8080/waterfalls/zipcode/53705</a></p>
+                <p>URL : http://18.221.180.234:8080/waterfallRest/zipcode/{Enter your zipcode here}</p>
             </div>
         </div>
     </div>
@@ -31,6 +33,7 @@
             <div class="well" id="userWell">
                 <p>URL : http://localhost:8080/waterfalls/name/{Enter name of waterfall here} -- this doesn't seem to work<br />
                     <a href="http://localhost:8080/waterfalls/name/Little%20River%20Falls">http://localhost:8080/waterfalls/name/Little%20River%20Falls</a></p>
+                <p>URL : http://18.221.180.234:8080/waterfallRest/name/{Enter name of waterfall here}</p>
             </div>
         </div>
     </div>
@@ -41,6 +44,7 @@
             <div class="well" id="userWell">
                <p>URL : http://localhost:8080/waterfalls/latitude/{Enter latitude}/longitude/{Enter longitude} <br/>
                    <a href="http://localhost:8080/waterfalls/latitude/-40.0/longitude/100.00011">http://localhost:8080/waterfalls/latitude/-40.0/longitude/100.00011</a></p>
+               <p>URL : http://18.221.180.234:8080/waterfallRest/latitude/{Enter latitude}/longitude/{Enter longitude}</p>
             </div>
         </div>
     </div>
@@ -50,6 +54,7 @@
             <div class="well" id="userWell">
                 <p>URL : http://localhost:8080/waterfalls/all<br>
                     <a href="http://localhost:8080/waterfalls/all">http://localhost:8080/waterfalls/all</a></p>
+                <p>URL : http://18.221.180.234:8080/waterfallRest/all</p>
             </div>
         </div>
     </div>
