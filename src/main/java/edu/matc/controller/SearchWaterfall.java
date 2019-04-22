@@ -1,7 +1,9 @@
 package edu.matc.controller;
 
+import edu.matc.entity.Coordinates;
 import edu.matc.entity.Waterfall;
 import edu.matc.persistence.GenericDao;
+import edu.matc.persistence.WaterfallDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 //import edu.matc.persistence.UserDao;
@@ -31,13 +33,22 @@ public class SearchWaterfall extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        GenericDao genericDao = new GenericDao(Waterfall.class);
+        WaterfallDao waterfallDao = new WaterfallDao();
 
-        if (req.getParameter("submit").equals("search")) {
-
+        if (req.getParameter("submit").equals("searchByZip")) {
+            Coordinates coordinates = waterfallDao.coordsFromZipcode(req.getParameter("searchZip"));
+            req.setAttribute("waterFallInfo", waterfallDao.findWaterfallsNear(coordinates));
         }
-        if (req.getParameter("submit").equals("viewAll")) {
-            req.setAttribute("waterFallInfo", genericDao.getAll());
+        if (req.getParameter("submit").equals("searchByName")) {
+            req.setAttribute("waterFallInfo", waterfallDao.getByPropertyEqual("name", req.getParameter("searchName")));
+        }
+        if (req.getParameter("submit").equals("searchByLatLong")) {
+            String latitude = req.getParameter("searchLatitude");
+            String longitude = req.getParameter("searchLongitude");
+            req.setAttribute("waterFallInfo", waterfallDao.findNearest(Double.parseDouble(latitude), Double.parseDouble(longitude)));
+        }
+        if (req.getParameter("submit").equals("searchAll")) {
+            req.setAttribute("waterFallInfo", waterfallDao.getAll());
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/waterfallResults.jsp");
