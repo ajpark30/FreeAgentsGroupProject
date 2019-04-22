@@ -19,7 +19,7 @@
     <h2>Requesting our waterfall information</h2>
     <br />
     <div class="well">
-        <p>Use this base URL :</p><input id="waterfallInfo" value="http://localhost:8080/waterfalls/" /><button onclick="copyToClip()">Copy</button>
+        <p>Use this base URL :</p><input id="waterfallInfo" value="http://18.221.180.234:8080/waterfallRest/" /><button onclick="copyToClip()">Copy</button>
     </div>
 </div>
 <div class="container-fluid col-md-8 col-md-offset-2">
@@ -27,7 +27,7 @@
     <br />
     <div class="row">
         <div class="well" id="userWell">
-            <p>Use this base URL :</p><input id="byZip" value="http://localhost:8080/waterfalls/zipcode/53705" /><button onclick="copyToClipByZip()">Copy</button>
+            <p>Use this base URL :</p><input id="byZip" value="http://18.221.180.234:8080/waterfallRest/zipcode/53705" /><button onclick="copyToClipByZip()">Copy</button>
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
     <br />
     <div class="row">
         <div class="well" id="userWell">
-            <p>Use this base URL :</p><input id="byName" value="http://localhost:8080/waterfalls/name/Little%20River%20Falls" /><button onclick="copyToClipByName()">Copy</button>
+            <p>Use this base URL :</p><input id="byName" value="http://18.221.180.234:8080/waterfallRest/name/Little%20River%20Falls" /><button onclick="copyToClipByName()">Copy</button>
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@
     <br />
     <div class="row">
         <div class="well" id="userWell">
-            <p>Use this base URL :</p><input id="byLatLng" value="http://localhost:8080/waterfalls/latitude/-40.0/longitude/100.00011" /><button onclick="copyToClipByLatLng()">Copy</button>
+            <p>Use this base URL :</p><input id="byLatLng" value="http://18.221.180.234:8080/waterfallRest/latitude/-40.0/longitude/100.00011" /><button onclick="copyToClipByLatLng()">Copy</button>
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
     <h2>All Waterfalls</h2>
     <div class="row">
         <div class="well" id="userWell">
-            <p>Use this base URL :</p><input id="all" value="http://localhost:8080/waterfalls/all" /><button onclick="copyToClipAll()">Copy</button>
+            <p>Use this base URL :</p><input id="all" value="http://18.221.180.234:8080/waterfallRest/all" /><button onclick="copyToClipAll()">Copy</button>
         </div>
     </div>
 </div>
