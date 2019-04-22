@@ -140,7 +140,7 @@ public class WaterfallTest {
 
         assertEquals(null, waterfallSearch);
         assertEquals(null, photoSearch);
-    }
+    }git
 
     /**
      * Set up photoDao and photo table.
