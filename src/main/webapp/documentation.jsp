@@ -1,33 +1,47 @@
-
 <%@include file="taglib.jsp"%>
 <%@include file="header.jsp"%>
 <body>
-    <h1>Documentation</h1>
-
-    <nav class="sitenavigation">
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="#usability">Usability</a></li>
-            <li><a href="#functionality">Functionality</a></li>
-            <li><a href="#dev">Development</a></li>
+<div class="jumbotron text-center">
+    <h1>Waterfall RESTful Service</h1>
+    <p>Documentation</p>
+</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a href="index.jsp">Home</a></li>
+            <li class="active"><a href="documentation.jsp">Documentation</a></li>
         </ul>
-    </nav>
-
-    <h2><a id="usability"></a>Usability</h2>
-        <ul>
-            <li>Searching by Zipcode - Find Nearest Waterfall</li>
-            <p>After entering a valid zipcode the program will return results nearest you. Containing the exact location
+    </div>
+</nav>
+<aside>
+    <p>All endpoints will return JSON</p>
+</aside>
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>Searching by Zipcode - Find Nearest Waterfall</h2>
+    <br />
+    <div class="well">
+        <p>After entering a valid zipcode the program will return results nearest you. Containing the exact location
             in latitude and longitude</p>
-            <li>Searching by Name - Get Location & Photo</li>
-            <p>If you know the name of the waterfall you wish to search, you will be provided location information
+        <code>http://localhost:8080/waterfalls/zipcode/{zipcode here}</code>
+    </div>
+</div>
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>Searching by Name - Get Location & Photo</h2>
+    <br />
+    <div class="well">
+        <p>If you know the name of the waterfall you wish to search, you will be provided location information
             and a photo.</p>
-            <li>Searching by Latitude Longitude</li>
-            <p>If you know approximate coordinates, find information on the nearest waterfall.</p>
-        </ul>
-
-    <h2><a id="functionality"></a>Functionality</h2>
-
-    <h2><a id="dev"></a>Development</h2>
+        <code>http://localhost:8080/waterfalls/{name here}</code>
+    </div>
+</div>
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>Searching by Latitude Longitude</h2>
+    <br />
+    <div class="well">
+        <p>If you know approximate coordinates, find information on the nearest waterfall.</p>
+        <code>http://localhost:8080/waterfalls/{coordinates here}</code>
+    </div>
+</div>
 
 </body>
 </html>
