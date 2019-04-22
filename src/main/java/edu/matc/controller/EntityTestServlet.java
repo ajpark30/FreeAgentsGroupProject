@@ -50,8 +50,8 @@ public class EntityTestServlet extends HttpServlet {
             }
         }
 */
-        DataParser dataParser = new DataParser();
-        dataParser.parseAndRead();
+//        DataParser dataParser = new DataParser();
+//        dataParser.parseAndRead();
 
         //logger.info("\nWaterfalls closest to 0,0");
         out.println("\nWaterfalls closest to 0,0");
