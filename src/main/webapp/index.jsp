@@ -10,7 +10,7 @@
         <br />
         <div class="well">
             <h2>Requesting our waterfall information</h2>
-            <p>Use this base URL : http://localhost:8080/waterfalls/</p>
+            <p>Use this base URL : http://18.221.180.234:8080/waterfallRest/</p>
         </div>
     </div>
     <div class="container col-md-8 col-md-offset-2">
@@ -18,7 +18,7 @@
         <br />
         <div class="row">
             <div class="well" id="userWell">
-                <p>URL : http://localhost:8080/waterfalls/zipcode/{Enter your zipcode here}</p>
+                <p>URL : http://18.221.180.234:8080/waterfallRest/zipcode/{Enter your zipcode here}</p>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
         <br />
         <div class="row">
             <div class="well" id="userWell">
-                <p>URL : http://localhost:8080/waterfalls/name/{Enter name of waterfall here}</p>
+                <p>URL : http://18.221.180.234:8080/waterfallRest/name/{Enter name of waterfall here}</p>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
         <br />
         <div class="row">
             <div class="well" id="userWell">
-               <p>URL : http://localhost:8080/waterfalls/latitude/{Enter latitude}/longitude/{Enter longitude}</p>
+               <p>URL : http://18.221.180.234:8080/waterfallRest/latitude/{Enter latitude}/longitude/{Enter longitude}</p>
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
         <h2>All Waterfalls</h2>
         <div class="row">
             <div class="well" id="userWell">
-                <p>URL : http://localhost:8080/waterfalls/all</p>
+                <p>URL : http://18.221.180.234:8080/waterfallRest/all</p>
             </div>
         </div>
     </div>
