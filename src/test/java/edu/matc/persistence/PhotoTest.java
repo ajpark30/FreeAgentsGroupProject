@@ -20,7 +20,7 @@ public class PhotoTest {
     private static final DatabaseUtility dbUtilStatic = new DatabaseUtility();
 
     /**
-     * Reset database.
+     * Set up database.
      */
     @BeforeAll
     public static void setUpAll() {
@@ -136,7 +136,7 @@ public class PhotoTest {
     public void testFindByDimensions() {
         List<Photo> photos = dao.findByDimensions(
                 1000
-                ,3000
+                , 3000
                 , 1000
                 , 2000
         );
@@ -170,8 +170,6 @@ public class PhotoTest {
     /**
      * Set up the waterfall dao.
      */
-    private void setUpWaterfallDao() {
-        waterfallDao = new WaterfallDao();
-    }
+    private void setUpWaterfallDao() { waterfallDao = new WaterfallDao(); }
 
 }
