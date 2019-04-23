@@ -17,15 +17,15 @@ public class PhotoTest {
 
     private PhotoDao dao;
     private WaterfallDao waterfallDao;
-    private static final DatabaseUtility dbUtilStatic = new DatabaseUtility();
 
     /**
      * Set up database.
      */
     @BeforeAll
     public static void setUpAll() {
-        dbUtilStatic.runSQL("target/test-classes/sql/create_waterfalls_db.sql");
-        dbUtilStatic.runSQL("target/test-classes/sql/waterfallSetup.sql");
+        DatabaseUtility dbUtil = new DatabaseUtility();
+        dbUtil.runSQL("target/test-classes/sql/create_waterfalls_db.sql");
+        dbUtil.runSQL("target/test-classes/sql/waterfallSetup.sql");
     }
 
     /**
