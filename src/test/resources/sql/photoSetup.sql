@@ -1,4 +1,6 @@
 DELETE FROM photo;
 
-INSERT INTO photo (photo_id, waterfall_id, sourceURL) VALUES (1, 3, 'https://upload.wikimedia.org/wikipedia/commons/3/3a/GrandfatherExposedPreCambrian.jpg');
-INSERT INTO photo (photo_id, waterfall_id, sourceURL) VALUES (2, 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Kalandula_waterfalls_of_the_Lucala-River_in_Malange%2C_Angola_%282%29.JPG/1200px-Kalandula_waterfalls_of_the_Lucala-River_in_Malange%2C_Angola_%282%29.JPG');
+INSERT INTO photo (photo_id, waterfall_id, sourceURL, width, height) VALUES (1, 3, 'https://upload.wikimedia.org/...', 1300, 1500);
+INSERT INTO photo (photo_id, waterfall_id, sourceURL, width, height) VALUES (2, 1, 'https://upload.wikimedia.org/...', 750, 2000);
+INSERT INTO photo (photo_id, waterfall_id, sourceURL, width, height) VALUES (3, 2, 'https://upload.wikimedia.org/...', 250, 1000);
+INSERT INTO photo (photo_id, waterfall_id, sourceURL, width, height) VALUES (4, 1, 'https://upload.wikimedia.org/...', 2000, 1000);
