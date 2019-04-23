@@ -68,8 +68,8 @@ public class PhotoTest {
      */
     @Test
     public void testGetByPropertyLike() {
-        List<Photo> photos = dao.getByPropertyLike("sourceURL", "wikipedia");
-        assertEquals(2, photos.size());
+        List<Photo> photos = dao.getByPropertyLike("sourceURL", "wiki");
+        assertEquals(4, photos.size());
     }
 
     /**
@@ -78,7 +78,7 @@ public class PhotoTest {
     @Test
     public void testGetAll() {
         List<Photo> photos = dao.getAll();
-        assertEquals(2, photos.size());
+        assertEquals(4, photos.size());
     }
 
     /**
@@ -130,6 +130,26 @@ public class PhotoTest {
     }
 
     /**
+     * Test find photos within dimension range.
+     */
+    @Test
+    public void testFindByDimensions() {
+        List<Photo> photos = dao.findByDimensions(
+                1000
+                ,3000
+                , 1000
+                , 2000
+        );
+
+        Photo photo1 = dao.getById(1);
+        Photo photo2 = dao.getById(4);
+
+        assertEquals(2, photos.size());
+        assertEquals(photo1.toString(), photos.get(0).toString());
+        assertEquals(photo2.toString(), photos.get(1).toString());
+    }
+
+    /**
      * Get mock photo.
      *
      * @return the photo
@@ -140,7 +160,9 @@ public class PhotoTest {
         Photo mockPhoto = new Photo();
         mockPhoto.setPhotoId(1);
         mockPhoto.setWaterfall(waterfallDao.getById(3));
-        mockPhoto.setSourceURL("https://upload.wikimedia.org/wikipedia/commons/3/3a/GrandfatherExposedPreCambrian.jpg");
+        mockPhoto.setSourceURL("https://upload.wikimedia.org/...");
+        mockPhoto.setHeight(1500);
+        mockPhoto.setWidth(1300);
 
         return mockPhoto;
     }
