@@ -1,5 +1,6 @@
 package edu.matc.persistence;
 
+import edu.matc.entity.Coordinates;
 import edu.matc.entity.Photo;
 import edu.matc.entity.Waterfall;
 import edu.matc.util.DatabaseUtility;
@@ -21,6 +22,7 @@ public class WaterfallTest {
 
     private WaterfallDao dao;
     private PhotoDao photoDao;
+    private GenericDao<Coordinates> coordsDao;
 
     /**
      * Reset database.
@@ -29,6 +31,7 @@ public class WaterfallTest {
     public static void setUpAll() {
         DatabaseUtility dbUtil = new DatabaseUtility();
         dbUtil.runSQL("target/test-classes/sql/create_waterfalls_db.sql");
+        dbUtil.runSQL("target/test-classes/sql/coordinatesSetup.sql");
     }
 
     /**
@@ -137,22 +140,105 @@ public class WaterfallTest {
         assertEquals(null, photoSearch);
     }
 
-//    /**
-//     * Test findNearest.
-//     */
-//    @Test
-//    public void testFindNearest() {
-//        List<Waterfall> source = getNearWaterfalls();
-//
-//        List<Waterfall> results = dao.findNearest(
-//            source.get(0).getLatitude()
-//            , source.get(0).getLongitude()
-//            , 10
-//            , 5000
-//        );
-//
-//        assertEquals(1, results.size());
-//    }
+    /**
+     * Test findNearest.
+     */
+    @Test
+    public void testFindNearest() {
+        Waterfall source = getSourceWaterfall();
+        Waterfall dest = getDestWaterfall();
+
+        List<Waterfall> waterfalls = dao.findNearest(
+            source.getLatitude()
+            , source.getLongitude()
+            , 10
+            , 6600
+        );
+
+        assertEquals(2, waterfalls.size());
+        assertEquals(dest.getLongitude(), waterfalls.get(1).getLongitude());
+        assertEquals(dest.getLatitude(), waterfalls.get(1).getLatitude());
+
+    }
+
+    /**
+     * Test find nearest with no within parameter.
+     */
+    @Test
+    public void testFindNearestNoWithin() {
+        Waterfall source = getSourceWaterfall();
+
+        List<Waterfall> waterfalls = dao.findNearest(
+                source.getLatitude(), source.getLongitude(), 4
+        );
+
+        assertEquals(4, waterfalls.size());
+    }
+
+    /**
+     * Test find nearest with only lat and long.
+     */
+    @Test
+    public void testFindNearestNoLatLong() {
+        Waterfall source = getSourceWaterfall();
+
+        List<Waterfall> waterfalls = dao.findNearest(
+            source.getLatitude(), source.getLongitude()
+        );
+
+        assertEquals(6, waterfalls.size());
+    }
+
+    /**
+     * Test find nearest with Coordinates object as parameter.
+     */
+    @Test
+    public void testFindNearestWithCoords() {
+        Coordinates cords = getSourceWaterfallCoords();
+        List<Waterfall> waterfalls = dao.findWaterfallsNear(cords);
+
+        assertEquals(6, waterfalls.size());
+    }
+
+    /**
+     * Test find nearest with Coordinates object and result count.
+     */
+    @Test
+    public void testFindNearestWithCoordsResultCount() {
+        Coordinates cords = getSourceWaterfallCoords();
+        List<Waterfall> waterfalls = dao.findWaterfallsNear(cords, 3);
+
+        assertEquals(3, waterfalls.size());
+    }
+
+    /**
+     * Test find nearest with Coordinates object, result count,
+     * and within.
+     */
+    @Test
+    public void testFindNearestWithCoordsAllParams() {
+        Coordinates coords = getSourceWaterfallCoords();
+
+        List<Waterfall> waterfalls = dao.findWaterfallsNear(
+                coords, 4, 7000
+        );
+
+        assertEquals(4, waterfalls.size());
+    }
+
+    /**
+     * Test find Coordinates from zip code string.
+     */
+    @Test
+    public void testFindCoordsFromZipcode() {
+
+        String zip = "612";
+
+        Coordinates coords = dao.coordsFromZipcode(zip);
+
+        assertEquals(18.402253, coords.getLatitude());
+        assertEquals(-66.711397, coords.getLongitude());
+    }
 
     /**
      * Set up photoDao and photo table.
@@ -175,13 +261,27 @@ public class WaterfallTest {
     }
 
     /**
-     * Get two waterfalls within 300 miles of each other.
-     * @return
+     * Gets waterfall with lat -9.07583 and long 16.0033.
+     *
+     * @return waterfall id #1
      */
-    private List<Waterfall> getNearWaterfalls() {
-        return new ArrayList<Waterfall>(Arrays.asList(
-            dao.getById(1)
-            , dao.getById(6)
-        ));
-    }
+    private Waterfall getSourceWaterfall() { return dao.getById(1); }
+
+    /**
+     * Gets waterfall nearest to waterfall id #1.
+     *
+     * @return waterfall id #2
+     */
+     private Waterfall getDestWaterfall() { return dao.getById(2); }
+
+    /**
+     * Get Coordinates object with waterfall id #1's coordinates.
+     *
+     * @return the coordinates
+     */
+    private Coordinates getSourceWaterfallCoords() {
+        Waterfall source = getSourceWaterfall();
+
+        return new Coordinates(source.getLatitude(), source.getLongitude());
+     }
 }
