@@ -11,10 +11,8 @@
     <h2>Requesting our waterfall information</h2>
     <br />
     <div class="well">
-        <%--<a href="http://18.221.180.234:8080/waterfallRest/waterfalls/">http://18.221.180.234:8080/waterfallRest/waterfalls/</a>--%>
-        <%--<p>Use this base URL :</p><input id="waterfallInfo" value="http://18.221.180.234:8080/waterfallRest/waterfalls/" /><button onclick="copyToClip()">Copy</button>--%>
             <p>Request our waterfall information with the following base URL:</p>
-            <code>http://18.221.180.234:8080/waterfallRest/waterfalls/</code><button class="btn btn-info btn-sm ml-3">Copy</button>
+            <code id="waterfallInfo">http://18.221.180.234:8080/waterfallRest/waterfalls/</code><button class="btn btn-info btn-sm ml-3" id="cInfo">Copy</button>
     </div>
 </div>
 <div class="container-fluid col-md-8 col-md-offset-2">
@@ -23,7 +21,7 @@
     <div class="well">
         <p>After entering a valid zipcode the program will return results nearest you. Containing the exact location
             in latitude and longitude</p>
-        <i>Format:&nbsp;&nbsp;</i><code>http://18.221.180.234:8080/waterfallRest/waterfalls/zipcode/{zipcode here}</code><button class="btn btn-info btn-sm ml-3">Copy</button>
+        <i>Format:&nbsp;&nbsp;</i><code id="byZip">http://18.221.180.234:8080/waterfallRest/waterfalls/zipcode/{zipcode here}</code><button id="cZip" class="btn btn-info btn-sm ml-3">Copy</button>
         <br><br>
         <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/zipcode/53705">http://18.221.180.234:8080/waterfallRest/waterfalls/zipcode/53705</a></p>
     </div>
@@ -35,7 +33,7 @@
     <div class="well">
         <p>If you know the name of the waterfall you wish to search, you will be provided location information
             and a photo.</p>
-        <i>Format:&nbsp;&nbsp;</i><code>http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/{name here}</code><button class="btn btn-info btn-sm ml-3">Copy</button>
+        <i>Format:&nbsp;&nbsp;</i><code id="byName">http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/{name here}</code><button id="cName" class="btn btn-info btn-sm ml-3">Copy</button>
         <br><br>
         <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/Little%20River%20Falls">http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/Little%20River%20Falls</a></p>
     </div>
@@ -46,7 +44,7 @@
     <br>
     <div class="well">
         <p>If you know approximate coordinates, find information on the nearest waterfall.</p>
-        <i>Format:&nbsp;&nbsp;</i><code>http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/{latitude}/longitude/{longitude}</code><button class="btn btn-info btn-sm ml-3">Copy</button>
+        <i>Format:&nbsp;&nbsp;</i><code id="byLatLng">http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/{latitude}/longitude/{longitude}</code><button id="cLatLng" class="btn btn-info btn-sm ml-3">Copy</button>
         <br><br>
         <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/-40.0/longitude/100.00011">http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/-40.0/longitude/100.00011</a></p>
     </div>
