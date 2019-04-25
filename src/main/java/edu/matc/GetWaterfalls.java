@@ -39,10 +39,10 @@ public class GetWaterfalls {
     }
 
     @GET
-    @Path("name/{param}/{param2}")
+    @Path("name/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Waterfall> getWaterfallsByName(@PathParam("param") String searchTerm, @PathParam("param2") String name) {
-        List<Waterfall> waterfallListByName = waterfallDao.getByPropertyEqual(searchTerm, name);
+    public List<Waterfall> getWaterfallsByName(@PathParam("param") String searchTerm) {
+        List<Waterfall> waterfallListByName = waterfallDao.getByPropertyEqual("name", searchTerm);
         return waterfallListByName;
     }
 
@@ -62,6 +62,13 @@ public class GetWaterfalls {
         return waterfallListByLocation;
     }
 
+    @GET
+    @Path("nameLike/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Waterfall> getWaterfallsByLikeName(@PathParam("param") String searchTerm) {
+        List<Waterfall> waterfallListByLikeName = waterfallDao.getByPropertyLike("name", searchTerm);
+        return waterfallListByLikeName;
+    }
 
 }
 

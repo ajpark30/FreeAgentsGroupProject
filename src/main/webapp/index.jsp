@@ -33,9 +33,9 @@
     <div class="well">
         <p>If you know the name of the waterfall you wish to search, you will be provided location information
             and a photo.</p>
-        <i>Format:&nbsp;&nbsp;</i><code id="byName">http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/{name here}</code><button id="cName" class="btn btn-info btn-sm ml-3">Copy</button>
+        <i>Format:&nbsp;&nbsp;</i><code id="byName">http://18.221.180.234:8080/waterfallRest/waterfalls/name/{name here}</code><button id="cName" class="btn btn-info btn-sm ml-3">Copy</button>
         <br><br>
-        <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/Little%20River%20Falls">http://18.221.180.234:8080/waterfallRest/waterfalls/name/name/Little%20River%20Falls</a></p>
+        <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/name/Little%20River%20Falls">http://18.221.180.234:8080/waterfallRest/waterfalls/name/Little%20River%20Falls</a></p>
     </div>
 </div>
 
@@ -47,6 +47,17 @@
         <i>Format:&nbsp;&nbsp;</i><code id="byLatLng">http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/{latitude}/longitude/{longitude}</code><button id="cLatLng" class="btn btn-info btn-sm ml-3">Copy</button>
         <br><br>
         <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/-40.0/longitude/100.00011">http://18.221.180.234:8080/waterfallRest/waterfalls/latitude/-40.0/longitude/100.00011</a></p>
+    </div>
+</div>
+
+<div class="container-fluid col-md-8 col-md-offset-2">
+    <h2>Searching by Like Name</h2>
+    <br>
+    <div class="well">
+        <p>Searches for best fit based on what was entered.</p>
+        <i>Format&nbsp;&nbsp;</i><code id="byNameLike">http://18.221.180.234:8080/waterfallRest/waterfalls/nameLike/{name here}</code><button id="cNameLike" class="btn btn-info btn-sm ml-3">Copy</button>
+        <br><br>
+        <p><i>Sample URL:&nbsp;&nbsp;</i><a href="http://18.221.180.234:8080/waterfallRest/waterfalls/nameLike/river">http://18.221.180.234:8080/waterfallRest/waterfalls/nameLike/river</a></p>
     </div>
 </div>
 
